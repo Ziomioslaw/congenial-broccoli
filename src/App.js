@@ -1,25 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+function Header() {
+  return (<header>
+    Download
+  </header>);
+}
+
+function Categories() {
+  return (<section>
+    <ol>
+    </ol>
+    <button>Add new Category</button>
+  </section>)
+}
+
+function Notepad() {
+  return (<section>
+    <textarea>
+    </textarea>
+    <button>Save</button>
+  </section>)
+}
+
+function ActionPanel() {
+  return (
+    <button>Rebuild</button>
+  )
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <section>
+      <header>
+        <Header />
       </header>
-    </div>
+
+      <Categories />
+      <Notepad />
+
+      <footer>
+        <ActionPanel />
+      </footer>
+    </section>
   );
 }
 
