@@ -1,0 +1,39 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "Windows",
+            "directory": "win",
+            "visiblity": 1,
+            "order": 10
+        },
+        {
+            "id": 2,
+            "name": "Źródła",
+            "directory": "source",
+            "visiblity": 1,
+            "order": 20
+        },
+        {
+            "id": 3,
+            "name": "Dodatki",
+            "directory": "addons",
+            "visiblity": 1,
+            "order": 30
+        },
+        {
+            "id": 4,
+            "name": "Mac OS",
+            "directory": "mac",
+            "visiblity": 1,
+            "order": 40
+        },
+        {
+            "id": 6,
+            "name": "G'MIC",
+            "directory": "gmic",
+            "visiblity": 1,
+            "order": 50
+        }
+    ]
+}
