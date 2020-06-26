@@ -15,3 +15,9 @@ npm install
 ```bash
 npm start
 ```
+
+## Bulma
+
+[Bulma](https://bulma.io/) is CSS framework. In this project the `react-bulma-components` is used.
+
+See [Storybook for React Bulma Components](https://couds.github.io/react-bulma-components/) for examples of use.
