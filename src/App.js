@@ -1,13 +1,13 @@
+import './App.scss';
 import React, { Component } from 'react';
-import './App.css';
 import Section from 'react-bulma-components/lib/components/section';
 import Box from 'react-bulma-components/lib/components/box';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Card from 'react-bulma-components/lib/components/card';
 import Content from 'react-bulma-components/lib/components/content';
-import List from 'react-bulma-components/lib/components/list';
-import { Textarea } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
+import { Textarea } from 'react-bulma-components/lib/components/form';
+import Tabs from 'react-bulma-components/lib/components/tabs';
 
 function Header() {
   return (<Box>
@@ -18,10 +18,18 @@ function Header() {
 }
 
 function Category(c) {
-  return (<List.Item key={c.id}>{c.name} [{c.directory}]</List.Item>)
+    return (<Card key={c.id}>
+      <Card.Header>
+        <Card.Header.Title>{c.name}</Card.Header.Title>
+      </Card.Header>
+      <Content>
+        {c.directory}
+      </Content>
+    </Card>);
 }
 
 class Categories extends Component {
+
   constructor() {
     super();
 
@@ -37,53 +45,67 @@ class Categories extends Component {
   }
 
   render() {
-    return (<Card>
-      <Card.Header>
-        <Card.Header.Title>Categories</Card.Header.Title>
-      </Card.Header>
-      <Content>
-        <List>
-          {this.state.categories.map(c => Category(c))}
-        </List>
-      </Content>
-      <Card.Footer>
-        <Card.Footer.Item renderAs="a">Add new Category</Card.Footer.Item>
-      </Card.Footer>
-    </Card>);
+    return this.state.categories.map(c => Category(c))
   }
 }
 
 function Notepad() {
-  return (<Card>
-      <Card.Header>
-        <Card.Header.Title>Notes</Card.Header.Title>
-      </Card.Header>
-      <Card.Content>
-        <Textarea name="comment" placeholder="Textarea" readOnly />
-      </Card.Content>
-      <Card.Footer>
-        <Card.Footer.Item renderAs="a">Save</Card.Footer.Item>
-      </Card.Footer>
-    </Card>)
+  return (<Textarea name="comment" placeholder="Textarea" readOnly />)
 }
 
 function ActionPanel() {
   return (<Box>
-      <Button>Rebuild</Button>
-    </Box>
+    <Button>Rebuild</Button>
+  </Box>
   )
 }
 
-function App() {
-  return (
-    <Section>
-      <Header />
-      <Categories />
-      <Notepad />
 
-      <ActionPanel />
-    </Section>
-  );
+class App extends Component {
+  static TABS = {
+    Categories: 1,
+    Notepad: 2
+  }
+
+  constructor() {
+    super();
+
+    this.state = {
+      activeTab: App.TABS.Categories
+    }
+  }
+
+  isActiveTab(tab) {
+    return this.state.activeTab === tab;
+  }
+
+  changeActiveTab(tab) {
+    this.setState({
+      ...this.state,
+      activeTab: tab
+    });
+  }
+
+  render() {
+    const activeTab = this.state.activeTab === App.TABS.Categories
+      ? <Categories />
+      : <Notepad />;
+
+    return (
+      <Section>
+        <Header />
+
+        <Tabs type="boxed" fullwidth={false}>
+          <Tabs.Tab active={this.isActiveTab(App.TABS.Categories)} onClick={() => this.changeActiveTab(App.TABS.Categories)}>Categories</Tabs.Tab>
+          <Tabs.Tab active={this.isActiveTab(App.TABS.Notepad)} onClick={() => this.changeActiveTab(App.TABS.Notepad)}>Notepad</Tabs.Tab>
+        </Tabs>
+
+        {activeTab}
+
+        <ActionPanel />
+      </Section>
+    );
+  }
 }
 
 export default App;
