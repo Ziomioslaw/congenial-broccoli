@@ -1,65 +1,11 @@
 import './App.scss';
 import React, { Component } from 'react';
 import Section from 'react-bulma-components/lib/components/section';
-import Box from 'react-bulma-components/lib/components/box';
-import Heading from 'react-bulma-components/lib/components/heading';
-import Card from 'react-bulma-components/lib/components/card';
-import Content from 'react-bulma-components/lib/components/content';
-import Button from 'react-bulma-components/lib/components/button';
-import { Textarea } from 'react-bulma-components/lib/components/form';
 import Tabs from 'react-bulma-components/lib/components/tabs';
-
-function Header() {
-  return (<Box>
-    <Heading>
-      Download
-    </Heading>
-  </Box>);
-}
-
-function Category(c) {
-    return (<Card key={c.id}>
-      <Card.Header>
-        <Card.Header.Title>{c.name}</Card.Header.Title>
-      </Card.Header>
-      <Content>
-        {c.directory}
-      </Content>
-    </Card>);
-}
-
-class Categories extends Component {
-
-  constructor() {
-    super();
-
-    this.state = {
-      categories: []
-    };
-  }
-
-  componentDidMount() {
-    fetch('https://my-json-server.typicode.com/ziomioslaw/congenial-broccoli/categories')
-      .then(res => res.json())
-      .then(data => this.setState({ categories: data }));
-  }
-
-  render() {
-    return this.state.categories.map(c => Category(c))
-  }
-}
-
-function Notepad() {
-  return (<Textarea name="comment" placeholder="Textarea" readOnly />)
-}
-
-function ActionPanel() {
-  return (<Box>
-    <Button>Rebuild</Button>
-  </Box>
-  )
-}
-
+import { Categories } from './Categories';
+import { Actions } from './Actions';
+import { Notepad } from './Notepad';
+import { Header } from './Header';
 
 class App extends Component {
   static TABS = {
@@ -102,7 +48,7 @@ class App extends Component {
 
         {activeTab}
 
-        <ActionPanel />
+        <Actions />
       </Section>
     );
   }
