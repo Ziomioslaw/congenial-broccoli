@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import { Category } from "./Category";
+import DownloadServiceContext from './DownloadServiceContext';
 
 export class Categories extends Component {
+  static contextType = DownloadServiceContext;
+
   constructor() {
     super();
 
@@ -10,10 +13,10 @@ export class Categories extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch('https://my-json-server.typicode.com/ziomioslaw/congenial-broccoli/categories')
-      .then(res => res.json())
-      .then(data => this.setState({ categories: data }));
+  async componentDidMount() {
+    this.setState({
+      categories: await this.context.getCategories()
+    });
   }
 
   render() {

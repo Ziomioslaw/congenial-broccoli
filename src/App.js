@@ -7,6 +7,7 @@ import { Actions } from './Actions';
 import { Notepad } from './Notepad';
 import { Header } from './Header';
 
+
 class App extends Component {
   static TABS = {
     Categories: 1,
