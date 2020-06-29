@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Card from 'react-bulma-components/lib/components/card';
 import Content from 'react-bulma-components/lib/components/content';
 
