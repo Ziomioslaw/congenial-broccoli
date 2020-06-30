@@ -6,48 +6,67 @@ import { Categories } from './Categories';
 import { Actions } from './Actions';
 import { Notepad } from './Notepad';
 import { Header } from './Header';
+import { ServerStatus } from './ServerStatus';
 
+class TabPanel {
+
+  constructor() {
+    this.tabs = {};
+  }
+  
+  addTab(tabName, element) {
+    this.activeTab = this.activeTab ?? tabName;
+    this.tabs[tabName] = element;
+  }
+
+  getTabsNames() {
+    return Object.keys(this.tabs);
+  }
+}
 
 class App extends Component {
-  static TABS = {
-    Categories: 1,
-    Notepad: 2
-  }
 
   constructor() {
     super();
 
+    this.tabPanel = new TabPanel();
+    this.tabPanel.addTab('Categories', <Categories />);
+    this.tabPanel.addTab('Notepad', <Notepad />);
+    this.tabPanel.addTab('Server Status', <ServerStatus />);
+
     this.state = {
-      activeTab: App.TABS.Categories
-    }
+      activeTab: 'Categories'
+    };
   }
 
-  isActiveTab(tab) {
-    return this.state.activeTab === tab;
+  isActiveTab(tabName) {
+    return this.state.activeTab === tabName;
   }
 
-  changeActiveTab(tab) {
+  getActiveElement() {
+    return this.tabPanel.tabs[this.state.activeTab];
+  }
+
+  setActiveTab(tabName) {
     this.setState({
       ...this.state,
-      activeTab: tab
+      activeTab: tabName
     });
   }
 
   render() {
-    const activeTab = this.state.activeTab === App.TABS.Categories
-      ? <Categories />
-      : <Notepad />;
-
     return (
       <Section>
         <Header />
 
         <Tabs type="boxed" fullwidth={false}>
-          <Tabs.Tab active={this.isActiveTab(App.TABS.Categories)} onClick={() => this.changeActiveTab(App.TABS.Categories)}>Categories</Tabs.Tab>
-          <Tabs.Tab active={this.isActiveTab(App.TABS.Notepad)} onClick={() => this.changeActiveTab(App.TABS.Notepad)}>Notepad</Tabs.Tab>
+          {this
+              .tabPanel
+              .getTabsNames()
+              .map(name => <Tabs.Tab key={name} active={this.isActiveTab(name)} onClick={() => this.setActiveTab(name)}>{name}</Tabs.Tab>)}
         </Tabs>
 
-        {activeTab}
+        {this.tabPanel.tabs[this.state.activeTab]}
 
         <Actions />
       </Section>
