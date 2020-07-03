@@ -37,7 +37,7 @@ export class Categories extends Component {
     this.setState({
       ...this.state,
       tabPanel: this.state.tabPanel.setActiveTab(category.name)
-    })
+    });
   }
 
   render() {
