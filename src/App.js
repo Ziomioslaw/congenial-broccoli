@@ -1,75 +1,52 @@
 import './App.scss';
 import React, { Component } from 'react';
-import Section from 'react-bulma-components/lib/components/section';
-import Tabs from 'react-bulma-components/lib/components/tabs';
 import { Categories } from './Categories';
 import { Actions } from './Actions';
 import { Notepad } from './Notepad';
 import { Header } from './Header';
 import { ServerStatus } from './ServerStatus';
-
-class TabPanel {
-
-  constructor() {
-    this.tabs = {};
-  }
-  
-  addTab(tabName, element) {
-    this.activeTab = this.activeTab ?? tabName;
-    this.tabs[tabName] = element;
-  }
-
-  getTabsNames() {
-    return Object.keys(this.tabs);
-  }
-}
+import Box from 'react-bulma-components/lib/components/box';
+import { TabPanel } from './TabPanel';
 
 class App extends Component {
 
   constructor() {
     super();
 
-    this.tabPanel = new TabPanel();
-    this.tabPanel.addTab('Categories', <Categories />);
-    this.tabPanel.addTab('Notepad', <Notepad />);
-    this.tabPanel.addTab('Server Status', <ServerStatus />);
+    const tabPanel = new TabPanel();
+
+    tabPanel.addTab('Categories', <Categories />);
+    tabPanel.addTab('Notepad', <Notepad />);
+    tabPanel.addTab('Server Status', <ServerStatus />);
 
     this.state = {
+      tabPanel: tabPanel,
       activeTab: 'Categories'
     };
   }
 
-  isActiveTab(tabName) {
-    return this.state.activeTab === tabName;
-  }
+  onTabChange(tab) {
+    this.state.tabPanel.setActiveTab(tab);
 
-  getActiveElement() {
-    return this.tabPanel.tabs[this.state.activeTab];
-  }
-
-  setActiveTab(tabName) {
     this.setState({
       ...this.state,
-      activeTab: tabName
+      activeTab: tab
     });
   }
 
   render() {
     return (
-      <Section>
-        <Header />
+      <React.Fragment>
+        <Header
+          tabPanel={this.state.tabPanel}
+          onTabChange={tab => this.onTabChange(tab)} />
 
-        <Tabs type="boxed" fullwidth={false}>
-          {this
-              .tabPanel
-              .getTabsNames()
-              .map(name => <Tabs.Tab key={name} active={this.isActiveTab(name)} onClick={() => this.setActiveTab(name)}>{name}</Tabs.Tab>)}
-        </Tabs>
-
-        {this.tabPanel.tabs[this.state.activeTab]}
+        <Box>
+          {this.state.tabPanel.getActiveValue()}
+        </Box>
 
         <Actions />
-      </Section>
+      </React.Fragment>
     );
   }
 }
