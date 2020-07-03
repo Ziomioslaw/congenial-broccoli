@@ -1,5 +1,5 @@
-
 export class TabPanel {
+
   constructor() {
     this.tabs = {};
   }
@@ -32,15 +32,5 @@ export class TabPanel {
   getValueFor(tabName) {
     return this.tabs[tabName];
   }
-}
 
-export class EmptyTabPanel {
-
-  getTabsNames() {
-    return [];
-  }
-
-  isActiveTab() {
-    return false;
-  }
 }

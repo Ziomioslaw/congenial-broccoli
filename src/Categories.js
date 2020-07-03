@@ -3,7 +3,9 @@ import { Component } from 'react';
 import DownloadServiceContext from './DownloadServiceContext';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Menu from 'react-bulma-components/lib/components/menu';
-import { TabPanel, EmptyTabPanel } from 'TabPanel';
+import { TabPanel } from 'TabPanel';
+import { Category } from 'Category';
+import Loader from 'react-bulma-components/lib/components/loader';
 
 export class Categories extends Component {
   static contextType = DownloadServiceContext;
@@ -12,7 +14,7 @@ export class Categories extends Component {
     super();
 
     this.state = {
-      tabPanel: new EmptyTabPanel(),
+      tabPanel: null,
       categories: []
     };
   }
@@ -39,6 +41,10 @@ export class Categories extends Component {
   }
 
   render() {
+    if (!this.state.tabPanel) {
+      return <Loader />
+    }
+
     return (<Columns>
 
       <Columns.Column size={2}>
@@ -57,7 +63,7 @@ export class Categories extends Component {
       </Columns.Column>
 
       <Columns.Column size={10}>
-
+        <Category categoryId={this.state.tabPanel.getActiveValue()} />
       </Columns.Column>
 
     </Columns>);
