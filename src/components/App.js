@@ -1,7 +1,6 @@
 import './App.scss';
 import React, { Component } from 'react';
 import { Categories } from './Categories';
-import { Actions } from './Actions';
 import { Notepad } from './Notepad';
 import { Header } from './Header';
 import { ServerStatus } from './ServerStatus';
@@ -35,18 +34,15 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <Header
-          tabPanel={this.state.tabPanel}
-          onTabChange={tab => this.onTabChange(tab)} />
+    return (<>
+      <Header
+        tabPanel={this.state.tabPanel}
+        onTabChange={tab => this.onTabChange(tab)} />
 
-        <Box>
-          {this.state.tabPanel.getActiveValue()}
-        </Box>
-
-        <Actions />
-      </React.Fragment>
+      <Box>
+        {this.state.tabPanel.getActiveValue()}
+      </Box>
+    </>
     );
   }
 }

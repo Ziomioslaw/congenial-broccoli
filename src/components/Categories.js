@@ -3,9 +3,11 @@ import { Component } from 'react';
 import DownloadServiceContext from '../services/DownloadServiceContext';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Menu from 'react-bulma-components/lib/components/menu';
+import Loader from 'react-bulma-components/lib/components/loader';
 import { TabPanel } from 'utilities/TabPanel';
 import { Category } from 'components/Category';
-import Loader from 'react-bulma-components/lib/components/loader';
+import { CategoriesActions } from './CategoriesActions';
+
 
 export class Categories extends Component {
   static contextType = DownloadServiceContext;
@@ -45,27 +47,31 @@ export class Categories extends Component {
       return <Loader />
     }
 
-    return (<Columns>
+    return (<>
+      <Columns>
 
-      <Columns.Column size={2}>
-        <Menu>
-          <Menu.List>
-            {this.state.categories.map(
-              category => <Menu.List.Item
-                key={category.id}
-                onClick={e => this.onCategoryChange(category)}
-                active={this.state.tabPanel.isActiveTab(category.name)}>
-                {category.name}
-              </Menu.List.Item>
-            )}
-          </Menu.List>
-        </Menu>
-      </Columns.Column>
+        <Columns.Column size={2}>
+          <Menu>
+            <Menu.List>
+              {this.state.categories.map(
+                category => <Menu.List.Item
+                  key={category.id}
+                  onClick={e => this.onCategoryChange(category)}
+                  active={this.state.tabPanel.isActiveTab(category.name)}>
+                  {category.name}
+                </Menu.List.Item>
+              )}
+            </Menu.List>
+          </Menu>
+        </Columns.Column>
 
-      <Columns.Column size={10}>
-        <Category categoryId={this.state.tabPanel.getActiveValue()} />
-      </Columns.Column>
+        <Columns.Column size={10}>
+          <Category categoryId={this.state.tabPanel.getActiveValue()} />
+        </Columns.Column>
 
-    </Columns>);
+      </Columns>
+
+      <CategoriesActions />
+    </>);
   }
 }
