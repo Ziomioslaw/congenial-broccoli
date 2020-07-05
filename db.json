@@ -1,142 +1,142 @@
 {
-    "categories": [
+  "categories": [
+    {
+      "id": 1,
+      "name": "Windows",
+      "directory": "win",
+      "visiblity": 1,
+      "order": 10,
+      "items": [
         {
-            "id": 1,
-            "name": "Windows",
-            "directory": "win",
-            "visiblity": 1,
-            "order": 10,
-            "items": [
-                {
-                    "id": 21,
-                    "name": "GIMP 2.10.20",
-                    "categoryId": 1,
-                    "path": "gimp-2.10.20-setup.exe",
-                    "description": "Najnowsza stabilna wersja",
-                    "visible": 1,
-                    "created": "2020-06-11",
-                    "size": 2323232,
-                    "order": 0,
-                    "downloaded": 1002
-                },
-                {
-                    "id": 19,
-                    "name": "GIMP 2.10.18",
-                    "categoryId": 1,
-                    "path": "gimp-2.10.18-setup.exe",
-                    "description": "",
-                    "visible": 1,
-                    "created": "2020-03-01",
-                    "size": 233434,
-                    "order": 10,
-                    "downloaded": 6332
-                },
-                {
-                    "id": 15,
-                    "name": "GIMP 2.10.16",
-                    "categoryId": 1,
-                    "path": "gimp-2.10.16-setup.exe",
-                    "description": "",
-                    "visible": 0,
-                    "created": "2019-09-05",
-                    "size": 21234,
-                    "order": 20,
-                    "downloaded": 8023
-                },
-                {
-                    "id": 12,
-                    "name": "GIMP 2.10.14",
-                    "categoryId": 1,
-                    "path": "gimp-2.10.14-setup.exe",
-                    "description": "",
-                    "visible": 0,
-                    "created": "2019-04-12",
-                    "size": 24244,
-                    "order": 50,
-                    "downloaded": 6332
-                }
-            ]
+          "id": 21,
+          "name": "GIMP 2.10.20",
+          "categoryId": 1,
+          "path": "gimp-2.10.20-setup.exe",
+          "description": "Najnowsza stabilna wersja",
+          "visible": 1,
+          "created": "2020-06-11",
+          "size": 2323232,
+          "order": 0,
+          "downloaded": 1002
         },
         {
-            "id": 2,
-            "name": "Źródła",
-            "directory": "source",
-            "visiblity": 1,
-            "order": 20,
-            "items": [
-                {
-                    "id": 19,
-                    "name": "GIMP 2.10.20",
-                    "categoryId": 2,
-                    "path": "gimp-2.10.20.zip",
-                    "description": "Źródła najnowszej stabilna wersji",
-                    "visible": 1,
-                    "created": "2020-06-11",
-                    "size": 2402443,
-                    "order": 0,
-                    "downloaded": 2303
-                },
-                {
-                    "id": 16,
-                    "name": "GIMP 2.10.18",
-                    "categoryId": 2,
-                    "path": "gimp-2.10.18-setup.exe",
-                    "description": "",
-                    "visible": 1,
-                    "created": "2020-03-01",
-                    "size": 233434,
-                    "order": 10,
-                    "downloaded": 4332
-                },
-                {
-                    "id": 12,
-                    "name": "GIMP 2.10.16",
-                    "categoryId": 2,
-                    "path": "gimp-2.10.16-setup.exe",
-                    "description": "",
-                    "visible": 0,
-                    "created": "2019-09-05",
-                    "size": 21234,
-                    "order": 20,
-                    "downloaded": 12752
-                },
-                {
-                    "id": 8,
-                    "name": "GIMP 2.10.14",
-                    "categoryId": 2,
-                    "path": "gimp-2.10.14-setup.exe",
-                    "description": "",
-                    "visible": 0,
-                    "created": "2019-04-12",
-                    "size": 24244,
-                    "order": 50,
-                    "downloaded": 5674
-                }
-            ]
+          "id": 19,
+          "name": "GIMP 2.10.18",
+          "categoryId": 1,
+          "path": "gimp-2.10.18-setup.exe",
+          "description": "",
+          "visible": 1,
+          "created": "2020-03-01",
+          "size": 233434,
+          "order": 10,
+          "downloaded": 6332
         },
         {
-            "id": 3,
-            "name": "Dodatki",
-            "directory": "addons",
-            "visiblity": 1,
-            "order": 30,
-            "items": []
+          "id": 15,
+          "name": "GIMP 2.10.16",
+          "categoryId": 1,
+          "path": "gimp-2.10.16-setup.exe",
+          "description": "",
+          "visible": 0,
+          "created": "2019-09-05",
+          "size": 21234,
+          "order": 20,
+          "downloaded": 8023
         },
         {
-            "id": 4,
-            "name": "Mac OS",
-            "directory": "mac",
-            "visiblity": 1,
-            "order": 40,
-            "items": []
-        },
-        {
-            "id": 6,
-            "name": "G'MIC",
-            "directory": "gmic",
-            "visiblity": 1,
-            "order": 50,
-            "items": []
+          "id": 12,
+          "name": "GIMP 2.10.14",
+          "categoryId": 1,
+          "path": "gimp-2.10.14-setup.exe",
+          "description": "",
+          "visible": 0,
+          "created": "2019-04-12",
+          "size": 24244,
+          "order": 50,
+          "downloaded": 6332
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Źródła",
+      "directory": "source",
+      "visiblity": 1,
+      "order": 20,
+      "items": [
+        {
+          "id": 19,
+          "name": "GIMP 2.10.20",
+          "categoryId": 2,
+          "path": "gimp-2.10.20.zip",
+          "description": "Źródła najnowszej stabilna wersji",
+          "visible": 1,
+          "created": "2020-06-11",
+          "size": 2402443,
+          "order": 0,
+          "downloaded": 2303
+        },
+        {
+          "id": 16,
+          "name": "GIMP 2.10.18",
+          "categoryId": 2,
+          "path": "gimp-2.10.18-setup.exe",
+          "description": "",
+          "visible": 1,
+          "created": "2020-03-01",
+          "size": 233434,
+          "order": 10,
+          "downloaded": 4332
+        },
+        {
+          "id": 12,
+          "name": "GIMP 2.10.16",
+          "categoryId": 2,
+          "path": "gimp-2.10.16-setup.exe",
+          "description": "",
+          "visible": 0,
+          "created": "2019-09-05",
+          "size": 21234,
+          "order": 20,
+          "downloaded": 12752
+        },
+        {
+          "id": 8,
+          "name": "GIMP 2.10.14",
+          "categoryId": 2,
+          "path": "gimp-2.10.14-setup.exe",
+          "description": "",
+          "visible": 0,
+          "created": "2019-04-12",
+          "size": 24244,
+          "order": 50,
+          "downloaded": 5674
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Dodatki",
+      "directory": "addons",
+      "visiblity": 1,
+      "order": 30,
+      "items": []
+    },
+    {
+      "id": 4,
+      "name": "Mac OS",
+      "directory": "mac",
+      "visiblity": 1,
+      "order": 40,
+      "items": []
+    },
+    {
+      "id": 6,
+      "name": "G'MIC",
+      "directory": "gmic",
+      "visiblity": 1,
+      "order": 50,
+      "items": []
+    }
+  ]
 }
