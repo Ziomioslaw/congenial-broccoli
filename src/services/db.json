@@ -138,5 +138,6 @@
       "order": 50,
       "items": []
     }
-  ]
+  ],
+  "notes": "## Linki i repozytoria dla Ubuntu\n\n##Python\nPython 2.6.6 (Strona projektu)\n\nPyGTK all-in-one (Repozytorium)\nPrzeznaczona jest pod systemy 32bit. Plik ten zawiera wszystkie potrzebne nam biblioteki - PyGTK, PyCairo oraz PyGObject"
 }

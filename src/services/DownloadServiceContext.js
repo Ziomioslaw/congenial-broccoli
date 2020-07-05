@@ -2,33 +2,25 @@ import React from "react";
 
 class DownloadService {
 
-  static REST_URL = 'https://my-json-server.typicode.com/ziomioslaw/congenial-broccoli/';
-
-  notepad = `## Linki i repozytoria dla Ubuntu
-
-##Python
-Python 2.6.6 (Strona projektu)
-
-PyGTK all-in-one (Repozytorium)
-Przeznaczona jest pod systemy 32bit. Plik ten zawiera wszystkie potrzebne nam biblioteki - PyGTK, PyCairo oraz PyGObject`;
+  constructor() {
+    this.db = require('./db.json');
+  }
 
   async getCategories() {
-    return fetch(`${DownloadService.REST_URL}categories`)
-      .then(res => res.json());
+    return Promise.resolve(this.db.categories);
   }
 
   async getCategory(categoryId) {
-    return fetch(`${DownloadService.REST_URL}categories/${categoryId}`)
-      .then(res => res.json());
+    return Promise.resolve(this.db.categories.find(c => c.id === categoryId));
   }
 
   async getNotepad() {
-    return Promise.resolve(this.notepad);
+    return Promise.resolve(this.db.notes);
   }
 
-  async saveNotepad(notepad) {
+  async saveNotepad(notes) {
     return new Promise(() => {
-      this.notepad = notepad;
+      this.db.notes = notes;
     });
   }
 }
