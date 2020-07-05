@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DownloadServiceContext from 'services/DownloadServiceContext';
 import { Textarea } from 'react-bulma-components/lib/components/form';
 import { NotepadActions } from './NotepadActions';
+import Loader from 'react-bulma-components/lib/components/loader';
 
 export class Notepad extends Component {
   static contextType = DownloadServiceContext;
@@ -10,7 +11,7 @@ export class Notepad extends Component {
     super(props);
 
     this.state = {
-      value: ''
+      value: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,6 +34,10 @@ export class Notepad extends Component {
   }
 
   render() {
+    if (this.state.value === null) {
+      return <Loader />
+    }
+
     return (<>
       <Textarea rows={25} onChange={this.handleChange} value={this.state.value} />
       <NotepadActions onSaveButton={this.onSaveButton} />
