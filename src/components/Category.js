@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DownloadServiceContext from 'DownloadServiceContext';
+import DownloadServiceContext from 'services/DownloadServiceContext';
 import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import { Item } from './Item';

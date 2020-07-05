@@ -6,7 +6,7 @@ import { Notepad } from './Notepad';
 import { Header } from './Header';
 import { ServerStatus } from './ServerStatus';
 import Box from 'react-bulma-components/lib/components/box';
-import { TabPanel } from './TabPanel';
+import { TabPanel } from '../utilities/TabPanel';
 
 class App extends Component {
 

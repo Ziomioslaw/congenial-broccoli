@@ -1,10 +1,10 @@
 import React from 'react';
 import { Component } from 'react';
-import DownloadServiceContext from './DownloadServiceContext';
+import DownloadServiceContext from '../services/DownloadServiceContext';
 import Columns from 'react-bulma-components/lib/components/columns';
 import Menu from 'react-bulma-components/lib/components/menu';
-import { TabPanel } from 'TabPanel';
-import { Category } from 'Category';
+import { TabPanel } from 'utilities/TabPanel';
+import { Category } from 'components/Category';
 import Loader from 'react-bulma-components/lib/components/loader';
 
 export class Categories extends Component {
