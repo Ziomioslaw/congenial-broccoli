@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Checkbox } from 'react-bulma-components/lib/components/form';
+import { DisplayByteSize } from './DisplayByteSize';
 
 export class Item extends Component {
 
@@ -12,11 +13,11 @@ export class Item extends Component {
 		};
 	}
 
-	onVisibleChange = (event) => {
-    this.setState({
+	onVisibleChange() {
+		this.setState({
 			...this.state,
 			visible: !this.state.visible
-    });
+		});
 	}
 
 	render() {
@@ -25,17 +26,10 @@ export class Item extends Component {
 			<td>{this.state.name}</td>
 			<td>{this.state.description}</td>
 			<td>{this.state.path}</td>
-			<td><Checkbox onChange={this.onVisibleChange} checked={this.state.visible} /></td>
+			<td><Checkbox onChange={_ => this.onVisibleChange()} checked={this.state.visible} /></td>
 			<td><DisplayByteSize value={this.state.size} /></td>
 			<td>{this.state.order}</td>
 			<td>{this.state.downloaded}</td>
 		</tr>);
 	}
-}
-
-function DisplayByteSize({ value }) {
-  const index = Math.floor(Math.log(value) / Math.log(1024));
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  return `${(value / Math.pow(1024, index)).toFixed(2) * 1} ${sizes[index]}`;
 }
