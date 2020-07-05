@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Hero from 'react-bulma-components/lib/components/hero';
 import Tabs from 'react-bulma-components/lib/components/tabs';
