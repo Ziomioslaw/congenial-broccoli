@@ -1,7 +1,7 @@
 import './InlineEdit.scss';
 import React, { Component } from 'react';
 import { Input } from 'react-bulma-components/lib/components/form';
-import ReactDOM from 'react-dom';
+
 
 export class InlineEdit extends Component {
 
@@ -17,6 +17,8 @@ export class InlineEdit extends Component {
     this.showEditor = this.showEditor.bind(this);
     this.changeValue = this.changeValue.bind(this);
     this.keyDown = this.keyDown.bind(this);
+
+    this.textInput = React.createRef();
   }
 
   showEditor() {
@@ -26,18 +28,9 @@ export class InlineEdit extends Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const inputElement = ReactDOM.findDOMNode(this.refs.input);
-    if (inputElement === null) {
-      return;
-    }
-
-console.log('inputElement', inputElement);
-
+  componentDidUpdate(_, prevState) {
     if (this.state.showEditor && !prevState.showEditor) {
-      inputElement.focus();
-    } else if (this.state.editing && prevProps.text !== this.props.text) {
-      this.cancel();
+      this.textInput.current.focus();
     }
   }
 
@@ -73,11 +66,11 @@ console.log('inputElement', inputElement);
     if (this.state.showEditor) {
       return (<Input
         type="text"
+        domRef={this.textInput}
         value={this.state.currentValue}
         onChange={this.changeValue}
         onKeyDown={this.keyDown}
-        onBlur={_ => this.cancel()}
-        ref="input" />);
+        onBlur={_ => this.cancel()} />);
     }
 
     return (<span onClick={this.showEditor}>{
