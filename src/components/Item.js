@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox } from 'react-bulma-components/lib/components/form';
+import { Checkbox, Select } from 'react-bulma-components/lib/components/form';
 import { DisplayByteSize } from './DisplayByteSize';
 import { InlineEdit } from './InlineEdit';
 
@@ -21,12 +21,23 @@ export class Item extends Component {
     });
   }
 
+  onFileChange(event) {
+    this.setState({
+      ...this.state,
+      path: event.target.value
+    })
+  }
+
   render() {
     return (<tr>
       <td>{this.state.id}</td>
       <td><InlineEdit value={this.state.name} /></td>
       <td><InlineEdit value={this.state.description} /></td>
-      <td>{this.state.path}</td>
+      <td>
+        <Select value={this.state.path} onChange={e => this.onFileChange(e)}>
+          {this.props.files.map((file, i) => <option key={i} value={file}>{file}</option>)}
+        </Select>
+      </td>
       <td><Checkbox onChange={_ => this.onVisibleChange()} checked={this.state.visible} /></td>
       <td><DisplayByteSize value={this.state.size} /></td>
       <td>{this.state.order}</td>

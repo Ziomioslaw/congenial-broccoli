@@ -18,6 +18,12 @@ class DownloadService {
     return Promise.resolve(this.db.notes);
   }
 
+  async getFilesInCategoryDirectory(categoryId) {
+    return await this.getCategory(categoryId)
+      .then(category => category.directory)
+      .then(directory => this.db.files[directory]);
+  }
+
   async saveNotepad(notes) {
     return new Promise(() => {
       this.db.notes = notes;

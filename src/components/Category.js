@@ -11,14 +11,16 @@ export class Category extends Component {
     super(props);
 
     this.state = {
-      category: null
+      category: null,
+      files: []
     };
   }
 
   async loadDate(categoryId) {
     this.setState({
       ...this.state,
-      category: await this.context.getCategory(categoryId)
+      category: await this.context.getCategory(categoryId),
+      files: await this.context.getFilesInCategoryDirectory(categoryId)
     });
   }
 
@@ -52,7 +54,7 @@ export class Category extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.category.items.map(item => <Item key={item.id} item={item} />)}
+          {this.state.category.items.map(item => <Item key={item.id} item={item} files={this.state.files} />)}
         </tbody>
       </Table>);
   }

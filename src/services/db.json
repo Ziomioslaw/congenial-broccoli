@@ -80,7 +80,7 @@
           "id": 16,
           "name": "GIMP 2.10.18",
           "categoryId": 2,
-          "path": "gimp-2.10.18-setup.exe",
+          "path": "gimp-2.10.18.zip",
           "description": "",
           "visible": 1,
           "created": "2020-03-01",
@@ -92,7 +92,7 @@
           "id": 12,
           "name": "GIMP 2.10.16",
           "categoryId": 2,
-          "path": "gimp-2.10.16-setup.exe",
+          "path": "gimp-2.10.16.zip",
           "description": "",
           "visible": 0,
           "created": "2019-09-05",
@@ -104,7 +104,7 @@
           "id": 8,
           "name": "GIMP 2.10.14",
           "categoryId": 2,
-          "path": "gimp-2.10.14-setup.exe",
+          "path": "gimp-2.10.14.zip",
           "description": "",
           "visible": 0,
           "created": "2019-04-12",
@@ -139,5 +139,23 @@
       "items": []
     }
   ],
+  "files": {
+    "win": [
+      "gimp-2.10.20-setup.exe",
+      "gimp-2.10.18-setup.exe",
+      "gimp-2.10.16-setup.exe",
+      "gimp-2.10.14-setup.exe",
+      "gimp-2.10.12-setup.exe"
+    ],
+    "source": [
+      "gimp-2.10.20.zip",
+      "gimp-2.10.18.zip",
+      "gimp-2.10.16.zip",
+      "gimp-2.10.14.zip",
+      "gimp-2.10.12.zip"
+    ],
+    "addons": [],
+    "mac": []
+  },
   "notes": "## Linki i repozytoria dla Ubuntu\n\n##Python\nPython 2.6.6 (Strona projektu)\n\nPyGTK all-in-one (Repozytorium)\nPrzeznaczona jest pod systemy 32bit. Plik ten zawiera wszystkie potrzebne nam biblioteki - PyGTK, PyCairo oraz PyGObject"
 }
