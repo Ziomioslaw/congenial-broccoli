@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import DownloadServiceContext from 'services/DownloadServiceContext';
 import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
-import { Item } from './Item';
+import { CategoryItem } from './CategoryItem';
 
 export class Category extends Component {
+
   static contextType = DownloadServiceContext;
 
   constructor(props) {
@@ -54,7 +55,7 @@ export class Category extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.category.items.map(item => <Item key={item.id} item={item} files={this.state.files} />)}
+          {this.state.category.items.map(item => <CategoryItem key={item.id} item={item} files={this.state.files} />)}
         </tbody>
       </Table>);
   }

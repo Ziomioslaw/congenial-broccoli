@@ -1,10 +1,10 @@
-import './Item.scss';
+import './CategoryItem.scss';
 import React, { Component } from 'react';
 import { Checkbox, Select } from 'react-bulma-components/lib/components/form';
 import { DisplayByteSize } from './DisplayByteSize';
 import { InlineEdit } from './InlineEdit';
 
-export class Item extends Component {
+export class CategoryItem extends Component {
 
   constructor(props) {
     super(props);
