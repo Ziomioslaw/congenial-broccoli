@@ -1,3 +1,4 @@
+import './Item.scss';
 import React, { Component } from 'react';
 import { Checkbox, Select } from 'react-bulma-components/lib/components/form';
 import { DisplayByteSize } from './DisplayByteSize';
@@ -29,7 +30,7 @@ export class Item extends Component {
   }
 
   render() {
-    return (<tr>
+    return (<tr class="vertical-align-middle">
       <td>{this.state.id}</td>
       <td><InlineEdit value={this.state.name} /></td>
       <td><InlineEdit value={this.state.description} /></td>
