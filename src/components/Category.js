@@ -3,6 +3,7 @@ import DownloadServiceContext from 'services/DownloadServiceContext';
 import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
+import { ReactSortable } from "react-sortablejs";
 
 export class Category extends Component {
 
@@ -15,6 +16,8 @@ export class Category extends Component {
       category: null,
       files: []
     };
+
+    this.setList = this.setList.bind(this);
   }
 
   async loadDate(categoryId) {
@@ -33,6 +36,19 @@ export class Category extends Component {
     if (prevProps.categoryId !== this.props.categoryId) {
       return this.loadDate(this.props.categoryId);
     }
+  }
+
+  setList(items) {
+    this.setState({
+      ...this.state,
+      category: {
+        ...this.state.category.items,
+        items: items.map((item, index) => ({
+          ...item,
+          order: index * 10
+        }))
+      }
+    });
   }
 
   render() {
@@ -54,9 +70,14 @@ export class Category extends Component {
             <td>Downloads</td>
           </tr>
         </thead>
-        <tbody>
+        <ReactSortable tag='tbody'
+          list={this.state.category.items}
+          setList={this.setList}
+          animation={200}
+          delayOnTouchStart={true}
+          delay={2}>
           {this.state.category.items.map(item => <CategoryItem key={item.id} item={item} files={this.state.files} />)}
-        </tbody>
+        </ReactSortable>
       </Table>);
   }
 }

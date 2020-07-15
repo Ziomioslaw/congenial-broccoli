@@ -30,7 +30,7 @@ export class CategoryItem extends Component {
   }
 
   render() {
-    return (<tr class="vertical-align-middle">
+    return (<tr className="vertical-align-middle">
       <td>{this.state.id}</td>
       <td><InlineEdit value={this.state.name} /></td>
       <td><InlineEdit value={this.state.description} /></td>
