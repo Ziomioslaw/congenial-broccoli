@@ -29,6 +29,14 @@ export class CategoryItem extends Component {
     })
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+      ...nextProps.item,
+      visible: nextProps.item.visible === 1
+    };
+  }
+
   render() {
     return (<tr className="vertical-align-middle">
       <td>{this.state.id}</td>

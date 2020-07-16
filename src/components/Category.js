@@ -51,10 +51,16 @@ export class Category extends Component {
     });
   }
 
+  sortItems(a, b) {
+    return a.order - b.order;
+  }
+
   render() {
     if (!this.state.category) {
       return <Loader />
     }
+
+    const items = this.state.category.items.sort(this.sortItems);
 
     return (
       <Table>
@@ -76,7 +82,7 @@ export class Category extends Component {
           animation={200}
           delayOnTouchStart={true}
           delay={2}>
-          {this.state.category.items.map(item => <CategoryItem key={item.id} item={item} files={this.state.files} />)}
+          {items.map(item => <CategoryItem key={item.id} item={item} files={this.state.files} />)}
         </ReactSortable>
       </Table>);
   }
