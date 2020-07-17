@@ -11,7 +11,15 @@ class DownloadService {
   }
 
   async getCategory(categoryId) {
-    return Promise.resolve(this.db.categories.find(c => c.id === categoryId));
+    const category = this.db.categories.find(c => c.id === categoryId)
+
+    return Promise.resolve({
+      ...category,
+      items: category.items.map(item => ({
+        ...item,
+        visible: item.visible === 1
+      }))
+    });
   }
 
   async getNotepad() {

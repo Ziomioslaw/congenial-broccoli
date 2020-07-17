@@ -18,6 +18,8 @@ export class Category extends Component {
     };
 
     this.setList = this.setList.bind(this);
+    this.onVisibleChange = this.onVisibleChange.bind(this);
+    this.onPathChange = this.onPathChange.bind(this);
   }
 
   async loadDate(categoryId) {
@@ -42,7 +44,7 @@ export class Category extends Component {
     this.setState({
       ...this.state,
       category: {
-        ...this.state.category.items,
+        ...this.state.category,
         items: items.map((item, index) => ({
           ...item,
           order: index * 10
@@ -53,6 +55,32 @@ export class Category extends Component {
 
   sortItems(a, b) {
     return a.order - b.order;
+  }
+
+  onVisibleChange(itemId, visible) {
+    this.setState({
+      ...this.state,
+      category: {
+        ...this.state.category,
+        items: this.state.category.items.map(item => ({
+          ...item,
+          visible: item.id === itemId ? visible : item.visible
+        }))
+      }
+    });
+  }
+
+  onPathChange(itemId, newPath) {
+    this.setState({
+      ...this.state,
+      category: {
+        ...this.state.category,
+        items: this.state.category.items.map(item => ({
+          ...item,
+          path: item.id === itemId ? newPath : item.path
+        }))
+      }
+    });
   }
 
   render() {
@@ -66,6 +94,7 @@ export class Category extends Component {
       <Table>
         <thead>
           <tr>
+            <td></td>
             <td>ID</td>
             <td>Name</td>
             <td>Description</td>
@@ -77,12 +106,19 @@ export class Category extends Component {
           </tr>
         </thead>
         <ReactSortable tag='tbody'
+          handle=".drag-able"
           list={this.state.category.items}
           setList={this.setList}
           animation={200}
           delayOnTouchStart={true}
           delay={2}>
-          {items.map(item => <CategoryItem key={item.id} item={item} files={this.state.files} />)}
+          {items.map(item => <CategoryItem
+            key={item.id}
+            item={item}
+            files={this.state.files}
+            onVisibleChange={this.onVisibleChange}
+            onPathChange={this.onPathChange}
+          />)}
         </ReactSortable>
       </Table>);
   }

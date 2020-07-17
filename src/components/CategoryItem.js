@@ -3,47 +3,28 @@ import React, { Component } from 'react';
 import { Checkbox, Select } from 'react-bulma-components/lib/components/form';
 import { DisplayByteSize } from './DisplayByteSize';
 import { InlineEdit } from './InlineEdit';
+import Icon from 'react-bulma-components/lib/components/icon';
 
 export class CategoryItem extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      ...props.item,
-      visible: props.item.visible === 1
-    };
+    this.state = CategoryItem.getDerivedStateFromProps(props, {});
   }
 
   onVisibleChange() {
-    this.setState({
-      ...this.state,
-      visible: !this.state.visible
-    });
-  }
-
-  onFileChange(event) {
-    this.setState({
-      ...this.state,
-      path: event.target.value
-    })
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      ...prevState,
-      ...nextProps.item,
-      visible: nextProps.item.visible === 1
-    };
+    this.props.onVisibleChange(this.state.id, !this.state.visible);
   }
 
   render() {
     return (<tr className="vertical-align-middle">
+      <td><Icon className="drag-able" icon="bars" color="info" /></td>
       <td>{this.state.id}</td>
       <td><InlineEdit value={this.state.name} /></td>
       <td><InlineEdit value={this.state.description} /></td>
       <td>
-        <Select value={this.state.path} onChange={e => this.onFileChange(e)}>
+        <Select value={this.state.path} onChange={e => this.props.onPathChange(this.state.id, e.target.value)}>
           {this.props.files.map((file, i) => <option key={i} value={file}>{file}</option>)}
         </Select>
       </td>
@@ -52,5 +33,12 @@ export class CategoryItem extends Component {
       <td>{this.state.order}</td>
       <td>{this.state.downloaded}</td>
     </tr>);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+      ...nextProps.item
+    };
   }
 }
