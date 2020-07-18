@@ -101,7 +101,6 @@ export class Category extends Component {
             <td>File name</td>
             <td>Visible</td>
             <td>Size</td>
-            <td>Order</td>
             <td>Downloads</td>
           </tr>
         </thead>
