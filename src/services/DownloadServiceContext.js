@@ -11,7 +11,7 @@ class DownloadService {
   }
 
   async getCategory(categoryId) {
-    const category = this.db.categories.find(c => c.id === categoryId)
+    const category = this.db.categories.find(category => category.id === categoryId)
 
     return Promise.resolve({
       ...category,
