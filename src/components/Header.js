@@ -6,7 +6,6 @@ import Tabs from 'react-bulma-components/lib/components/tabs';
 export function Header({ tabPanel, onTabChange }) {
   return (
     <Hero info="true">
-
       <Hero.Body>
         <Heading>Download</Heading>
         <Heading subtitle size={5}>
@@ -18,14 +17,13 @@ export function Header({ tabPanel, onTabChange }) {
         <Tabs type="boxed" fullwidth={true}>
           {tabPanel.getTabsNames().map(tab => <Tabs.Tab
               key={tab}
-              onClick={e => onTabChange(tab)}
+              onClick={_ => onTabChange(tab)}
               active={tabPanel.isActiveTab(tab)}>
                 {tab}
               </Tabs.Tab>
           )}
         </Tabs>
       </Hero.Footer>
-
     </Hero>
   );
 }

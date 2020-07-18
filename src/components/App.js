@@ -1,4 +1,3 @@
-import './App.scss';
 import React, { Component } from 'react';
 import { Categories } from './Categories';
 import { Notepad } from './Notepad';

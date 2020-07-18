@@ -49,14 +49,13 @@ export class Categories extends Component {
 
     return (<>
       <Columns>
-
         <Columns.Column size={2}>
           <Menu>
             <Menu.List>
               {this.state.categories.map(
                 category => <Menu.List.Item
                   key={category.id}
-                  onClick={e => this.onCategoryChange(category)}
+                  onClick={_ => this.onCategoryChange(category)}
                   active={this.state.tabPanel.isActiveTab(category.name)}>
                   {category.name}
                 </Menu.List.Item>
@@ -68,7 +67,6 @@ export class Categories extends Component {
         <Columns.Column size={10}>
           <Category categoryId={this.state.tabPanel.getActiveValue()} />
         </Columns.Column>
-
       </Columns>
 
       <CategoriesActions />

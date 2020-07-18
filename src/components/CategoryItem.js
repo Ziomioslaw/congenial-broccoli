@@ -13,7 +13,7 @@ export function CategoryItem({ item, files, onVisibleChange, onPathChange }) {
     <td><InlineEdit value={item.description} /></td>
     <td>
       <Select value={item.path} onChange={e => onPathChange(item.id, e.target.value)}>
-        {files.map((file, i) => <option key={i} value={file}>{file}</option>)}
+        {files.map((file, index) => <option key={index} value={file}>{file}</option>)}
       </Select>
     </td>
     <td><Checkbox onChange={_ => onVisibleChange(item.id, !item.visible)} checked={item.visible} /></td>
