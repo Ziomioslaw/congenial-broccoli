@@ -34,15 +34,13 @@ class App extends Component {
 
   render() {
     return (<>
-      <Header
-        tabPanel={this.state.tabPanel}
-        onTabChange={tab => this.onTabChange(tab)} />
-
-      <Box>
-        {this.state.tabPanel.getActiveValue()}
-      </Box>
-    </>
-    );
+        <Header
+          tabPanel={this.state.tabPanel}
+          onTabChange={tab => this.onTabChange(tab)} />
+        <Box>
+          {this.state.tabPanel.getActiveValue()}
+        </Box>
+      </>);
   }
 }
 

@@ -41,16 +41,19 @@ export class Category extends Component {
   }
 
   setList(items) {
+    const curentItems = this.state.category.items;
+    const newItemsList = items.map((item, index) => ({ ...item, order: index * 10 }));
+    const itemsToSave = newItemsList.filter((newItem) => curentItems.find(i => i.id === newItem.id).order !== newItem.order);
+
     this.setState({
       ...this.state,
       category: {
         ...this.state.category,
-        items: items.map((item, index) => ({
-          ...item,
-          order: index * 10
-        }))
+        items: newItemsList
       }
     });
+
+    itemsToSave.forEach(item => this.context.saveCategoryItem(item));
   }
 
   sortItems(a, b) {
@@ -116,8 +119,7 @@ export class Category extends Component {
             item={item}
             files={this.state.files}
             onVisibleChange={this.onVisibleChange}
-            onPathChange={this.onPathChange}
-          />)}
+            onPathChange={this.onPathChange} />)}
         </ReactSortable>
       </Table>);
   }

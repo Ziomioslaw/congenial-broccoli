@@ -22,6 +22,20 @@ class DownloadService {
     });
   }
 
+  async saveCategoryItem(categoryItem) {
+    return Promise.resolve(this.db = {
+      ...this.db,
+      categories: [
+        ...this.db.categories.map(category => category.id !== categoryItem.categoryId
+            ? category
+            : {
+                ...category,
+                items: category.items.map(item => item.id === categoryItem.id ? categoryItem : item)
+            })
+      ]
+    });
+  }
+
   async getNotepad() {
     return Promise.resolve(this.db.notes);
   }
