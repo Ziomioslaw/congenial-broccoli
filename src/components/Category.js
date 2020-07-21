@@ -53,15 +53,15 @@ export class Category extends Component {
       }
     });
 
-    itemsToSave.forEach(item => this.context.saveCategoryItem(item));
+    itemsToSave.forEach(async item => await this.context.saveCategoryItem(item));
   }
 
   sortItems(a, b) {
     return a.order - b.order;
   }
 
-  onVisibleChange(itemId, visible) {
-    this.setState({
+  async onVisibleChange(itemId, visible) {
+    const newState = {
       ...this.state,
       category: {
         ...this.state.category,
@@ -70,7 +70,11 @@ export class Category extends Component {
           visible: item.id === itemId ? visible : item.visible
         }))
       }
-    });
+    };
+
+    this.setState(newState);
+
+    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
   onPathChange(itemId, newPath) {
