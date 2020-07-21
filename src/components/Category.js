@@ -77,8 +77,8 @@ export class Category extends Component {
     await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
-  onPathChange(itemId, newPath) {
-    this.setState({
+  async onPathChange(itemId, newPath) {
+    const newState = {
       ...this.state,
       category: {
         ...this.state.category,
@@ -87,7 +87,11 @@ export class Category extends Component {
           path: item.id === itemId ? newPath : item.path
         }))
       }
-    });
+    };
+
+    this.setState(newState);
+
+    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
   render() {
