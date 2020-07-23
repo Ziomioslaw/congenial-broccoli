@@ -1,9 +1,9 @@
 import React from 'react';
-import Box from 'react-bulma-components/lib/components/box';
 import Button from 'react-bulma-components/lib/components/button';
 
 export function CategoriesActions() {
-  return (<Box>
+  return (<Button.Group>
     <Button>Rebuild</Button>
-  </Box>);
+    <Button>Refresh files</Button>
+  </Button.Group>);
 }
