@@ -4,8 +4,7 @@ import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
 import { ReactSortable } from "react-sortablejs";
-import { Field, Control, Label, InputFile } from 'react-bulma-components/lib/components/form';
-import Icon from 'react-bulma-components/lib/components/icon';
+import AddCategoryItem from './AddCategoryItem';
 
 
 export class Category extends Component {
@@ -134,12 +133,7 @@ export class Category extends Component {
         </ReactSortable>
       </Table>
 
-      <Field>
-        <Label>File</Label>
-        <Control>
-          <InputFile icon={<Icon icon="upload" />} />
-        </Control>
-      </Field>
+      <AddCategoryItem category={this.state.category} />
     </>);
   }
 }
