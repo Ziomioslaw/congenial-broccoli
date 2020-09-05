@@ -1,19 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Columns from 'react-bulma-components/lib/components/columns';
 import { Field, Control, Label, InputFile, Input } from 'react-bulma-components/lib/components/form';
 import Icon from 'react-bulma-components/lib/components/icon';
 import Button from 'react-bulma-components/lib/components/button';
 
-export default function AddCategoryItem() {
 
-  return (<Columns>
+export default class AddCategoryItem extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      link: ''
+    };
+
+    this.onChangeLink = this.onChangeLink.bind(this);
+    this.onChangeFile = this.onChangeFile.bind(this);
+    this.onClickLinkSubmit = this.onClickLinkSubmit.bind(this);
+    this.onClickFileSubmit = this.onClickFileSubmit.bind(this);
+  }
+
+  onChangeLink(event) {
+    this.setState({
+      ...this.state,
+      link: event.target.value
+    });
+  }
+
+  onChangeFile(event) {
+    this.setState({
+      ...this.state,
+      files: [...event.target.files]
+    });
+  }
+
+  onClickLinkSubmit() {
+    this.props.onLinkUpload({ link: this.state.link });
+  }
+
+  onClickFileSubmit() {
+    this.props.onFileUpload({ files: this.state.files });
+  }
+
+  render() {
+    return (<Columns>
       <Columns.Column>
+
         <Field>
           <Label>File</Label>
           <Control>
-            <InputFile icon={<Icon icon="upload" />} />
-            <Button type="primary">Submit</Button>
+            <InputFile icon={<Icon icon="upload" />} onChange={this.onChangeFile} />
+            <Button type="primary" onClick={this.onClickFileSubmit}>Upload file</Button>
           </Control>
         </Field>
       </Columns.Column>
@@ -22,11 +59,16 @@ export default function AddCategoryItem() {
         <Field>
           <Label>Wget link</Label>
           <Control>
-            <Input placeholder="Text input" />
-            <Button type="primary">Submit</Button>
+            <Input
+              type="text"
+              placeholder="Text input"
+              value={this.state.link}
+              onChange={this.onChangeLink} />
+            <Button type="primary" onClick={this.onClickLinkSubmit}>Download link</Button>
           </Control>
         </Field>
       </Columns.Column>
 
-    </Columns>)
+    </Columns>);
+  }
 }

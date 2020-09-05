@@ -22,6 +22,8 @@ export class Category extends Component {
     this.setList = this.setList.bind(this);
     this.onVisibleChange = this.onVisibleChange.bind(this);
     this.onPathChange = this.onPathChange.bind(this);
+    this.onFileUpload = this.onFileUpload.bind(this);
+    this.onLinkUpload = this.onLinkUpload.bind(this);
   }
 
   async loadDate(categoryId) {
@@ -96,6 +98,14 @@ export class Category extends Component {
     await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
+  onFileUpload(event) {
+    console.log('onFileUpload', event);
+  }
+
+  onLinkUpload(event) {
+    console.log('onLinkUpload', event);
+  }
+
   render() {
     if (!this.state.category) {
       return <Loader />
@@ -133,7 +143,10 @@ export class Category extends Component {
         </ReactSortable>
       </Table>
 
-      <AddCategoryItem category={this.state.category} />
+      <AddCategoryItem
+        category={this.state.category}
+        onLinkUpload={this.onLinkUpload}
+        onFileUpload={this.onFileUpload} />
     </>);
   }
 }
