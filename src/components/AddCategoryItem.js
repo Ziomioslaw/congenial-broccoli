@@ -11,7 +11,8 @@ export default class AddCategoryItem extends Component {
     super(props);
 
     this.state = {
-      link: ''
+      link: '',
+      files: []
     };
 
     this.onChangeLink = this.onChangeLink.bind(this);
@@ -50,7 +51,12 @@ export default class AddCategoryItem extends Component {
           <Label>File</Label>
           <Control>
             <InputFile icon={<Icon icon="upload" />} onChange={this.onChangeFile} />
-            <Button type="primary" onClick={this.onClickFileSubmit}>Upload file</Button>
+            <Button
+              type="primary"
+              disabled={this.state.files.length === 0}
+              onClick={this.onClickFileSubmit}>
+              Upload file
+            </Button>
           </Control>
         </Field>
       </Columns.Column>
@@ -64,7 +70,12 @@ export default class AddCategoryItem extends Component {
               placeholder="Text input"
               value={this.state.link}
               onChange={this.onChangeLink} />
-            <Button type="primary" onClick={this.onClickLinkSubmit}>Download link</Button>
+            <Button
+              type="primary"
+              disabled={this.state.link.trim().length === 0}
+              onClick={this.onClickLinkSubmit}>
+              Download link
+            </Button>
           </Control>
         </Field>
       </Columns.Column>
