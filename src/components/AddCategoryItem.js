@@ -46,7 +46,6 @@ export default class AddCategoryItem extends Component {
   render() {
     return (<Columns>
       <Columns.Column>
-
         <Field>
           <Label>File</Label>
           <Control>
