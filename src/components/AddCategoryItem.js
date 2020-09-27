@@ -37,6 +37,10 @@ export default class AddCategoryItem extends Component {
 
   onClickLinkSubmit() {
     this.props.onLinkUpload({ link: this.state.link });
+    this.setState({
+      ...this.state,
+      link: ''
+    });
   }
 
   onClickFileSubmit() {

@@ -54,6 +54,19 @@ class DownloadService {
       this.db.notes = notes;
     });
   }
+
+  async uploadItem(categoryId, link) {
+    const category = await this.getCategory(categoryId);
+    const tokens = link.split('/');
+    const lastToken = tokens[tokens.length - 1];
+
+    this.db.files[category.directory] = [
+      ...this.db.files[category.directory],
+      lastToken
+    ];
+
+    return true;
+  }
 }
 
 const DownloadServiceContext = React.createContext(new DownloadService());

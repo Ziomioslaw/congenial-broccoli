@@ -102,8 +102,12 @@ export class Category extends Component {
     console.log('onFileUpload', event);
   }
 
-  onLinkUpload(event) {
-    console.log('onLinkUpload', event);
+  async onLinkUpload(event) {
+    const categoryId = this.props.categoryId;
+
+    if (await this.context.uploadItem(categoryId, event.link)) {
+      await this.loadDate(categoryId);
+    }
   }
 
   render() {
