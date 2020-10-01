@@ -45,6 +45,10 @@ export default class AddCategoryItem extends Component {
 
   onClickFileSubmit() {
     this.props.onFileUpload({ files: this.state.files });
+    this.setState({
+      ...this.state,
+      files: []
+    });
   }
 
   render() {

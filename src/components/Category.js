@@ -98,8 +98,16 @@ export class Category extends Component {
     await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
-  onFileUpload(event) {
-    console.log('onFileUpload', event);
+  async onFileUpload(event) {
+    const categoryId = this.props.categoryId;
+
+    for (const file of event.files) {
+      await this.context.uploadFile(categoryId, file);
+    }
+
+    if (event.files.length > 0) {
+      await this.loadDate(categoryId);
+    }
   }
 
   async onLinkUpload(event) {

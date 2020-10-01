@@ -67,6 +67,18 @@ class DownloadService {
 
     return true;
   }
+
+  async uploadFile(categoryId, file) {
+    const category = await this.getCategory(categoryId);
+    const directory = category.directory;
+
+    this.db.files[directory] = [
+      ...this.db.files[directory],
+      file.name
+    ];
+
+    return true;
+  }
 }
 
 const DownloadServiceContext = React.createContext(new DownloadService());
