@@ -5,6 +5,7 @@ import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
 import { ReactSortable } from "react-sortablejs";
 import AddCategoryItem from './AddCategoryItem';
+import { AddButton } from './AddButton';
 
 
 export class Category extends Component {
@@ -129,7 +130,7 @@ export class Category extends Component {
       <Table>
         <thead>
           <tr>
-            <td></td>
+            <td><AddButton /></td>
             <td>ID</td>
             <td>Name</td>
             <td>Description</td>
