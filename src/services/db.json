@@ -154,22 +154,22 @@
   ],
   "files": {
     "win": [
-      "gimp-2.10.20-setup.exe",
-      "gimp-2.10.18-setup.exe",
-      "gimp-2.10.16-setup.exe",
-      "gimp-2.10.14-setup.exe",
-      "gimp-2.10.12-setup.exe"
+      { "name": "gimp-2.10.20-setup.exe", "size": 96675, "date": "2019-08-26T20:14:12.232Z" },
+      { "name": "gimp-2.10.18-setup.exe", "size": 34842, "date": "2019-07-01T22:05:14.232Z" },
+      { "name": "gimp-2.10.16-setup.exe", "size": 74355, "date": "2019-10-15T07:43:48.232Z" },
+      { "name": "gimp-2.10.14-setup.exe", "size": 78838, "date": "2020-02-03T05:19:05.232Z" },
+      { "name": "gimp-2.10.12-setup.exe", "size": 97225, "date": "2019-03-16T23:20:52.232Z" }
     ],
     "source": [
-      "gimp-2.10.20.zip",
-      "gimp-2.10.18.zip",
-      "gimp-2.10.16.zip",
-      "gimp-2.10.14.zip",
-      "gimp-2.10.12.zip"
+      { "name": "gimp-2.10.20.zip", "size": 24706, "date": "2020-07-21T22:49:41.232Z" },
+      { "name": "gimp-2.10.18.zip", "size": 40823, "date": "2019-11-18T10:42:25.232Z" },
+      { "name": "gimp-2.10.16.zip", "size": 34451, "date": "2019-01-08T08:46:19.232Z" },
+      { "name": "gimp-2.10.14.zip", "size": 13112, "date": "2019-05-11T13:54:14.232Z" },
+      { "name": "gimp-2.10.12.zip", "size": 70289, "date": "2020-02-09T19:11:53.232Z" }
     ],
     "addons": [],
     "mac": [
-      "gimp-2.10.16.mac"
+      { "name": "gimp-2.10.16.mac", "size": 70568, "date": "2020-10-02T17:03:31.232Z" }
     ]
   },
   "notes": "## Linki i repozytoria dla Ubuntu\n\n##Python\nPython 2.6.6 (Strona projektu)\n\nPyGTK all-in-one (Repozytorium)\nPrzeznaczona jest pod systemy 32bit. Plik ten zawiera wszystkie potrzebne nam biblioteki - PyGTK, PyCairo oraz PyGObject"

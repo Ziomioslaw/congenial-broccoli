@@ -25,6 +25,8 @@ export class Category extends Component {
     this.onPathChange = this.onPathChange.bind(this);
     this.onFileUpload = this.onFileUpload.bind(this);
     this.onLinkUpload = this.onLinkUpload.bind(this);
+    this.onAddButton = this.onAddButton.bind(this);
+    this.onNewSave = this.onNewSave.bind(this);
   }
 
   async loadDate(categoryId) {
@@ -43,6 +45,40 @@ export class Category extends Component {
     if (prevProps.categoryId !== this.props.categoryId) {
       return this.loadDate(this.props.categoryId);
     }
+  }
+
+  async onAddButton(event) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const file = this.state.files.sort((a, b) => a.date > b.date)[0];
+
+    this.setState({
+      ...this.state,
+      category: {
+        ...this.state.category,
+        items: [
+          {
+            id: null,
+            name: "",
+            categoryId: this.props.categoryId,
+            path: file.name,
+            description: "",
+            visible: true,
+            created: `${yyyy}-${mm}-${dd}`,
+            size: file.size,
+            order: 0,
+            downloaded: 0
+          },
+          ...this.state.category.items
+        ]
+      }
+    });
+  }
+
+  onNewSave(event) {
+    console.log('onNewSave', event);
   }
 
   setList(items) {
@@ -87,10 +123,13 @@ export class Category extends Component {
       ...this.state,
       category: {
         ...this.state.category,
-        items: this.state.category.items.map(item => ({
-          ...item,
-          path: item.id === itemId ? newPath : item.path
-        }))
+        items: this.state.category.items.map(item =>
+          item.id === itemId ? {
+            ...item,
+            path: newPath,
+            size: this.state.files.find(f => f.name === newPath).size
+          } : item
+        )
       }
     };
 
@@ -130,7 +169,7 @@ export class Category extends Component {
       <Table>
         <thead>
           <tr>
-            <td><AddButton /></td>
+            <td><AddButton onClick={this.onAddButton} /></td>
             <td>ID</td>
             <td>Name</td>
             <td>Description</td>
@@ -152,7 +191,8 @@ export class Category extends Component {
             item={item}
             files={this.state.files}
             onVisibleChange={this.onVisibleChange}
-            onPathChange={this.onPathChange} />)}
+            onPathChange={this.onPathChange}
+            onSave={this.onNewSave} />)}
         </ReactSortable>
       </Table>
 
