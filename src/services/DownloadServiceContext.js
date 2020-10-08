@@ -55,6 +55,25 @@ class DownloadService {
     });
   }
 
+  async addItem(item) {
+    const category = this.db.categories.find(category => category.id === item.categoryId);
+    const newId = Math.max(...category.items.map(i => i.id)) + 1;
+
+    category.items = [
+      ...category.items.map((item, index) => ({
+        ...item,
+        order: (index + 1) * 10
+      })),
+      {
+        ...item,
+        id: newId,
+        order: 0
+      }
+    ];
+
+    return Promise.resolve(newId);
+  }
+
   async uploadItem(categoryId, link) {
     const category = await this.getCategory(categoryId);
     const tokens = link.split('/');

@@ -29,7 +29,7 @@ export class Category extends Component {
     this.onNewSave = this.onNewSave.bind(this);
   }
 
-  async loadDate(categoryId) {
+  async loadData(categoryId) {
     this.setState({
       ...this.state,
       category: await this.context.getCategory(categoryId),
@@ -38,16 +38,20 @@ export class Category extends Component {
   }
 
   componentDidMount() {
-    return this.loadDate(this.props.categoryId);
+    return this.loadData(this.props.categoryId);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.categoryId !== this.props.categoryId) {
-      return this.loadDate(this.props.categoryId);
+      return this.loadData(this.props.categoryId);
     }
   }
 
   async onAddButton(event) {
+    if (this.isNewPresent()) {
+      return;
+    }
+
     const today = new Date();
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -77,8 +81,13 @@ export class Category extends Component {
     });
   }
 
-  onNewSave(event) {
-    console.log('onNewSave', event);
+  isNewPresent() {
+    return this.state.category.items.some(i => !i.id);
+  }
+
+  async onNewSave() {
+    await this.context.addItem(this.state.category.items.find(i => i.id === null));
+    await this.loadData(this.props.categoryId);
   }
 
   setList(items) {
@@ -146,7 +155,7 @@ export class Category extends Component {
     }
 
     if (event.files.length > 0) {
-      await this.loadDate(categoryId);
+      await this.loadData(categoryId);
     }
   }
 
@@ -154,7 +163,7 @@ export class Category extends Component {
     const categoryId = this.props.categoryId;
 
     if (await this.context.uploadItem(categoryId, event.link)) {
-      await this.loadDate(categoryId);
+      await this.loadData(categoryId);
     }
   }
 
@@ -169,7 +178,7 @@ export class Category extends Component {
       <Table>
         <thead>
           <tr>
-            <td><AddButton onClick={this.onAddButton} /></td>
+            <td>{this.isNewPresent() ? '' : <AddButton onClick={this.onAddButton} />}</td>
             <td>ID</td>
             <td>Name</td>
             <td>Description</td>
