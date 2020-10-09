@@ -4,8 +4,8 @@ import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
 import { ReactSortable } from "react-sortablejs";
-import AddCategoryItem from './AddCategoryItem';
 import { AddButton } from './AddButton';
+import { FileList } from './FileList';
 
 
 export class Category extends Component {
@@ -186,6 +186,7 @@ export class Category extends Component {
             <td>Visible</td>
             <td>Size</td>
             <td>Downloads</td>
+            <td>Actions</td>
           </tr>
         </thead>
         <ReactSortable tag='tbody'
@@ -205,10 +206,7 @@ export class Category extends Component {
         </ReactSortable>
       </Table>
 
-      <AddCategoryItem
-        category={this.state.category}
-        onLinkUpload={this.onLinkUpload}
-        onFileUpload={this.onFileUpload} />
+      <FileList category={this.state.category} files={this.state.files} />
     </>);
   }
 }

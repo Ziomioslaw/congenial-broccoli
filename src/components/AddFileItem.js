@@ -5,7 +5,7 @@ import Icon from 'react-bulma-components/lib/components/icon';
 import Button from 'react-bulma-components/lib/components/button';
 
 
-export default class AddCategoryItem extends Component {
+export default class AddFileItem extends Component {
 
   constructor(props) {
     super(props);
