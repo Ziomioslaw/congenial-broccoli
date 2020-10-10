@@ -98,6 +98,13 @@ class DownloadService {
 
     return true;
   }
+
+  async deleteFile(categoryId, file) {
+    const category = await this.getCategory(categoryId);
+    const directory = category.directory;
+
+    this.db.files[directory] = this.db.files[directory].filter(f => f.name !== file.name);
+  }
 }
 
 const DownloadServiceContext = React.createContext(new DownloadService());

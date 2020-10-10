@@ -20,18 +20,38 @@ export class FileList extends Component {
   constructor() {
     super();
 
+    this.state = {
+      files: []
+    };
+
     this.onDelete = this.onDelete.bind(this);
   }
 
-  onDelete(file) {
-    console.log('onDelete', file);
+  async loadData(categoryId) {
+    this.setState({
+      files: await this.context.getFilesInCategoryDirectory(categoryId)
+    });
+  }
+
+  componentDidMount() {
+    return this.loadData(this.props.categoryId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.categoryId !== this.props.categoryId) {
+      return this.loadData(this.props.categoryId);
+    }
+  }
+
+  async onDelete(file) {
+    this.context.deleteFile(this.props.categoryId, file);
+    await this.loadData(this.props.categoryId);
   }
 
   render() {
-    if (!this.props.files) {
+    if (!this.state.files) {
       return <Loader />
     }
-
 
     return (<>
       <Table>
@@ -43,7 +63,7 @@ export class FileList extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.files.map((file, index) => <tr key={index}>
+          {this.state.files.map((file, index) => <tr key={index}>
             <td>{file.name}</td>
             <td>{file.size}</td>
             <td>

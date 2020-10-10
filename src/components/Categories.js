@@ -7,6 +7,7 @@ import Loader from 'react-bulma-components/lib/components/loader';
 import { TabPanel } from 'utilities/TabPanel';
 import { Category } from 'components/Category';
 import { CategoriesActions } from './CategoriesActions';
+import { FileList } from './FileList';
 
 
 export class Categories extends Component {
@@ -47,6 +48,8 @@ export class Categories extends Component {
       return <Loader />
     }
 
+    const displayedCategoryId = this.state.tabPanel.getActiveValue();
+
     return (<>
       <Columns>
         <Columns.Column size={2}>
@@ -65,7 +68,8 @@ export class Categories extends Component {
         </Columns.Column>
 
         <Columns.Column size={10}>
-          <Category categoryId={this.state.tabPanel.getActiveValue()} />
+          <Category categoryId={displayedCategoryId} />
+          <FileList categoryId={displayedCategoryId} />
         </Columns.Column>
       </Columns>
 

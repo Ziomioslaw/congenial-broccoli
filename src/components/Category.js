@@ -5,7 +5,6 @@ import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
 import { ReactSortable } from "react-sortablejs";
 import { AddButton } from './AddButton';
-import { FileList } from './FileList';
 
 
 export class Category extends Component {
@@ -205,8 +204,6 @@ export class Category extends Component {
             onSave={this.onNewSave} />)}
         </ReactSortable>
       </Table>
-
-      <FileList category={this.state.category} files={this.state.files} />
     </>);
   }
 }
