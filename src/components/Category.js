@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DownloadServiceContext from 'services/DownloadServiceContext';
-import Loader from 'react-bulma-components/lib/components/loader';
 import Table from 'react-bulma-components/lib/components/table';
 import { CategoryItem } from './CategoryItem';
 import { ReactSortable } from "react-sortablejs";
@@ -15,8 +14,7 @@ export class Category extends Component {
     super(props);
 
     this.state = {
-      category: null,
-      files: []
+      newItem: null
     };
 
     this.setList = this.setList.bind(this);
@@ -26,24 +24,6 @@ export class Category extends Component {
     this.onLinkUpload = this.onLinkUpload.bind(this);
     this.onAddButton = this.onAddButton.bind(this);
     this.onNewSave = this.onNewSave.bind(this);
-  }
-
-  async loadData(categoryId) {
-    this.setState({
-      ...this.state,
-      category: await this.context.getCategory(categoryId),
-      files: await this.context.getFilesInCategoryDirectory(categoryId)
-    });
-  }
-
-  componentDidMount() {
-    return this.loadData(this.props.categoryId);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.categoryId !== this.props.categoryId) {
-      return this.loadData(this.props.categoryId);
-    }
   }
 
   async onAddButton(event) {
@@ -81,7 +61,7 @@ export class Category extends Component {
   }
 
   isNewPresent() {
-    return this.state.category.items.some(i => !i.id);
+    return this.state.newItem;
   }
 
   async onNewSave() {
@@ -90,17 +70,9 @@ export class Category extends Component {
   }
 
   setList(items) {
-    const curentItems = this.state.category.items;
+    const curentItems = this.props.items;
     const newItemsList = items.map((item, index) => ({ ...item, order: index * 10 }));
     const itemsToSave = newItemsList.filter((newItem) => curentItems.find(i => i.id === newItem.id).order !== newItem.order);
-
-    this.setState({
-      ...this.state,
-      category: {
-        ...this.state.category,
-        items: newItemsList
-      }
-    });
 
     itemsToSave.forEach(async item => await this.context.saveCategoryItem(item));
   }
@@ -167,12 +139,6 @@ export class Category extends Component {
   }
 
   render() {
-    if (!this.state.category) {
-      return <Loader />
-    }
-
-    const items = this.state.category.items.sort(this.sortItems);
-
     return (<>
       <Table>
         <thead>
@@ -190,15 +156,15 @@ export class Category extends Component {
         </thead>
         <ReactSortable tag='tbody'
           handle=".drag-able"
-          list={this.state.category.items}
+          list={this.props.items}
           setList={this.setList}
           animation={200}
           delayOnTouchStart={true}
           delay={2}>
-          {items.map(item => <CategoryItem
+          {this.props.items.map(item => <CategoryItem
             key={item.id}
             item={item}
-            files={this.state.files}
+            files={this.props.files}
             onVisibleChange={this.onVisibleChange}
             onPathChange={this.onPathChange}
             onSave={this.onNewSave} />)}

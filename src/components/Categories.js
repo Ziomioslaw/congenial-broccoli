@@ -5,9 +5,8 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Menu from 'react-bulma-components/lib/components/menu';
 import Loader from 'react-bulma-components/lib/components/loader';
 import { TabPanel } from 'utilities/TabPanel';
-import { Category } from 'components/Category';
 import { CategoriesActions } from './CategoriesActions';
-import { FileList } from './FileList';
+import { CategoryDataWrapper } from './CategoryDataWrapper';
 
 
 export class Categories extends Component {
@@ -48,8 +47,6 @@ export class Categories extends Component {
       return <Loader />
     }
 
-    const displayedCategoryId = this.state.tabPanel.getActiveValue();
-
     return (<>
       <Columns>
         <Columns.Column size={2}>
@@ -68,8 +65,7 @@ export class Categories extends Component {
         </Columns.Column>
 
         <Columns.Column size={10}>
-          <Category categoryId={displayedCategoryId} />
-          <FileList categoryId={displayedCategoryId} />
+          <CategoryDataWrapper categoryId={this.state.tabPanel.getActiveValue()} />
         </Columns.Column>
       </Columns>
 

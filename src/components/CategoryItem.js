@@ -22,6 +22,7 @@ export function CategoryItem({ item, files, onVisibleChange, onPathChange, onSav
     <td><Checkbox onChange={_ => onVisibleChange(item.id, !item.visible)} checked={item.visible} /></td>
     <td><DisplayByteSize value={item.size} /></td>
     <td>{id ? item.downloaded : buildSaveButton(onSave)}</td>
+    <td><Button className="delete"></Button></td>
   </tr>);
 }
 
