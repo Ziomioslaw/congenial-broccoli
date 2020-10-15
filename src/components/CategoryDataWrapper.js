@@ -17,6 +17,8 @@ export class CategoryDataWrapper extends Component {
     };
 
     this.onDelete = this.onDelete.bind(this);
+    this.onFileUpload = this.onFileUpload.bind(this);
+    this.onLinkUpload = this.onLinkUpload.bind(this);
   }
 
   async componentDidMount() {
@@ -40,6 +42,26 @@ export class CategoryDataWrapper extends Component {
   async onDelete(file) {
     this.context.deleteFile(this.props.categoryId, file);
     await this.loadData(this.props.categoryId);
+  }
+
+  async onFileUpload(event) {
+    const categoryId = this.props.categoryId;
+
+    for (const file of event.files) {
+      await this.context.uploadFile(categoryId, file);
+    }
+
+    if (event.files.length > 0) {
+      await this.loadData(categoryId);
+    }
+  }
+
+  async onLinkUpload(event) {
+    const categoryId = this.props.categoryId;
+
+    if (await this.context.uploadItem(categoryId, event.link)) {
+      await this.loadData(categoryId);
+    }
   }
 
   render() {

@@ -20,8 +20,6 @@ export class Category extends Component {
     this.setList = this.setList.bind(this);
     this.onVisibleChange = this.onVisibleChange.bind(this);
     this.onPathChange = this.onPathChange.bind(this);
-    this.onFileUpload = this.onFileUpload.bind(this);
-    this.onLinkUpload = this.onLinkUpload.bind(this);
     this.onAddButton = this.onAddButton.bind(this);
     this.onNewSave = this.onNewSave.bind(this);
   }
@@ -118,25 +116,6 @@ export class Category extends Component {
     await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
   }
 
-  async onFileUpload(event) {
-    const categoryId = this.props.categoryId;
-
-    for (const file of event.files) {
-      await this.context.uploadFile(categoryId, file);
-    }
-
-    if (event.files.length > 0) {
-      await this.loadData(categoryId);
-    }
-  }
-
-  async onLinkUpload(event) {
-    const categoryId = this.props.categoryId;
-
-    if (await this.context.uploadItem(categoryId, event.link)) {
-      await this.loadData(categoryId);
-    }
-  }
 
   render() {
     return (<>

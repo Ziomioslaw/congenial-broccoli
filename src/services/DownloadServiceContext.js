@@ -81,7 +81,10 @@ class DownloadService {
 
     this.db.files[category.directory] = [
       ...this.db.files[category.directory],
-      lastToken
+      {
+        name: lastToken,
+        size: Math.floor(Math.random() * 2323) + 234
+      }
     ];
 
     return true;
