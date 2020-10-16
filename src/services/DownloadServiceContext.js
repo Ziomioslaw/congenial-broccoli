@@ -96,7 +96,10 @@ class DownloadService {
 
     this.db.files[directory] = [
       ...this.db.files[directory],
-      file.name
+      {
+        name: file.name,
+        size: Math.floor(Math.random() * 2323) + 234
+      }
     ];
 
     return true;
