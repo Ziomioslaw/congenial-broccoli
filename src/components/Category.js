@@ -18,13 +18,10 @@ export class Category extends Component {
     };
 
     this.setList = this.setList.bind(this);
-    this.onVisibleChange = this.onVisibleChange.bind(this);
-    this.onPathChange = this.onPathChange.bind(this);
     this.onAddButton = this.onAddButton.bind(this);
-    this.onNewSave = this.onNewSave.bind(this);
   }
 
-  async onAddButton(event) {
+  async onAddButton() {
     if (this.isNewPresent()) {
       return;
     }
@@ -62,11 +59,6 @@ export class Category extends Component {
     return this.state.newItem;
   }
 
-  async onNewSave() {
-    await this.context.addItem(this.state.category.items.find(i => i.id === null));
-    await this.loadData(this.props.categoryId);
-  }
-
   setList(items) {
     const curentItems = this.props.items;
     const newItemsList = items.map((item, index) => ({ ...item, order: index * 10 }));
@@ -79,45 +71,11 @@ export class Category extends Component {
     return a.order - b.order;
   }
 
-  async onVisibleChange(itemId, visible) {
-    const newState = {
-      ...this.state,
-      category: {
-        ...this.state.category,
-        items: this.state.category.items.map(item => ({
-          ...item,
-          visible: item.id === itemId ? visible : item.visible
-        }))
-      }
-    };
-
-    this.setState(newState);
-
-    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
-  }
-
-  async onPathChange(itemId, newPath) {
-    const newState = {
-      ...this.state,
-      category: {
-        ...this.state.category,
-        items: this.state.category.items.map(item =>
-          item.id === itemId ? {
-            ...item,
-            path: newPath,
-            size: this.state.files.find(f => f.name === newPath).size
-          } : item
-        )
-      }
-    };
-
-    this.setState(newState);
-
-    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
-  }
-
-
   render() {
+    const items = this.isNewPresent()
+      ? [this.state.newItem, ...this.props.items]
+      : this.props.items;
+
     return (<>
       <Table>
         <thead>
@@ -140,13 +98,13 @@ export class Category extends Component {
           animation={200}
           delayOnTouchStart={true}
           delay={2}>
-          {this.props.items.map(item => <CategoryItem
+          {items.map(item => <CategoryItem
             key={item.id}
             item={item}
             files={this.props.files}
-            onVisibleChange={this.onVisibleChange}
-            onPathChange={this.onPathChange}
-            onSave={this.onNewSave} />)}
+            onVisibleChange={this.props.onVisibleChange}
+            onPathChange={this.props.onPathChange}
+            onSave={this.props.onSave} />)}
         </ReactSortable>
       </Table>
     </>);

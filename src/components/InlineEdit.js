@@ -39,6 +39,8 @@ export class InlineEdit extends Component {
       ...this.state,
       currentValue: e.target.value
     });
+
+    this.props.onChange(e.target.value);
   }
 
   cancel() {

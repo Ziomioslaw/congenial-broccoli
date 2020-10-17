@@ -19,6 +19,10 @@ export class CategoryDataWrapper extends Component {
     this.onDelete = this.onDelete.bind(this);
     this.onFileUpload = this.onFileUpload.bind(this);
     this.onLinkUpload = this.onLinkUpload.bind(this);
+    this.onPathChange = this.onPathChange.bind(this);
+    this.onNewSave = this.onNewSave.bind(this);
+    this.onVisibleChange = this.onVisibleChange.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   async componentDidMount() {
@@ -64,6 +68,52 @@ export class CategoryDataWrapper extends Component {
     }
   }
 
+  async onPathChange(itemId, newPath) {
+    const newState = {
+      ...this.state,
+      category: {
+        ...this.state.category,
+        items: this.state.category.items.map(item =>
+          item.id === itemId ? {
+            ...item,
+            path: newPath,
+            size: this.state.files.find(f => f.name === newPath).size
+          } : item
+        )
+      }
+    };
+
+    this.setState(newState);
+
+    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
+  }
+
+  async onNewSave() {
+    await this.context.addItem(this.state.category.items.find(i => i.id === null));
+    await this.loadData(this.props.categoryId);
+  }
+
+  async onVisibleChange(itemId, visible) {
+    const newState = {
+      ...this.state,
+      category: {
+        ...this.state.category,
+        items: this.state.category.items.map(item => ({
+          ...item,
+          visible: item.id === itemId ? visible : item.visible
+        }))
+      }
+    };
+
+    this.setState(newState);
+
+    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
+  }
+
+  async onSave(item) {
+
+  }
+
   render() {
     if (this.state.files.length === 0 || !this.state.category) {
       return <Loader />
@@ -73,7 +123,11 @@ export class CategoryDataWrapper extends Component {
       <Category
         categoryId={this.props.categoryId}
         files={this.state.files}
-        items={this.state.category.items} />
+        items={this.state.category.items}
+        onPathChange={this.onPathChange}
+        onNewSave={this.onNewSave}
+        onVisibleChange={this.onVisibleChange}
+        onSave={this.onSave} />
       <FileList
         files={this.state.files}
         onDelete={this.onDelete} />
