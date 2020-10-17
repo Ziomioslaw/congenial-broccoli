@@ -113,7 +113,22 @@ class DownloadService {
   }
 }
 
-const DownloadServiceContext = React.createContext(new DownloadService());
+const originalObject = new DownloadService();
+
+const loginWrapper = Object.getOwnPropertyNames(Object.getPrototypeOf(originalObject))
+  .filter(memberName => 'function' === typeof originalObject[memberName])
+  .reduce((p, methodName) => ({
+    ...p,
+    [methodName]: (...args) => {
+      console.log('DownloadService.', methodName, args);
+      const result = originalObject[methodName](...args);
+      console.log('Result:', result);
+
+      return result;
+    }
+  }), {});
+
+const DownloadServiceContext = React.createContext(loginWrapper);
 
 export const DownloadServiceProvider = DownloadServiceContext.Provider;
 export const DownloadServiceConsumer = DownloadServiceContext.Consumer;
