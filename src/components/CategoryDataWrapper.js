@@ -21,7 +21,6 @@ export class CategoryDataWrapper extends Component {
     this.onLinkUpload = this.onLinkUpload.bind(this);
     this.onPathChange = this.onPathChange.bind(this);
     this.onNewSave = this.onNewSave.bind(this);
-    this.onVisibleChange = this.onVisibleChange.bind(this);
     this.onSave = this.onSave.bind(this);
   }
 
@@ -93,25 +92,20 @@ export class CategoryDataWrapper extends Component {
     await this.loadData(this.props.categoryId);
   }
 
-  async onVisibleChange(itemId, visible) {
+  async onSave(newItem) {
+console.log('onSave', newItem);
     const newState = {
-      ...this.state,
+      ...this.state.category,
       category: {
         ...this.state.category,
-        items: this.state.category.items.map(item => ({
-          ...item,
-          visible: item.id === itemId ? visible : item.visible
-        }))
+        items: this.state.category.items.map(item => item.id === newItem.Id ? newItem : item)
       }
     };
 
     this.setState(newState);
 
-    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === itemId));
-  }
-
-  async onSave(item) {
-
+    await this.context.saveCategoryItem(newState.category.items.find(item => item.id === newItem.id));
+    await this.loadData(this.props.categoryId);
   }
 
   render() {
@@ -126,7 +120,6 @@ export class CategoryDataWrapper extends Component {
         items={this.state.category.items}
         onPathChange={this.onPathChange}
         onNewSave={this.onNewSave}
-        onVisibleChange={this.onVisibleChange}
         onSave={this.onSave} />
       <FileList
         files={this.state.files}

@@ -39,8 +39,6 @@ export class InlineEdit extends Component {
       ...this.state,
       currentValue: e.target.value
     });
-
-    this.props.onChange(e.target.value);
   }
 
   cancel() {
@@ -53,13 +51,16 @@ export class InlineEdit extends Component {
 
   keyDown(event) {
     if (event.keyCode === 13) {
+      const currentValue = this.state.currentValue;
+
       this.setState({
         ...this.state,
         originalValue: this.state.currentValue,
         showEditor: false
       });
-    }
-    else if (event.keyCode === 27) {
+
+      this.props.onSave(currentValue);
+    } else if (event.keyCode === 27) {
       this.cancel();
     }
   }
