@@ -120,9 +120,9 @@ const loginWrapper = Object.getOwnPropertyNames(Object.getPrototypeOf(originalOb
   .reduce((p, methodName) => ({
     ...p,
     [methodName]: (...args) => {
-      console.log('DownloadService.', methodName, args);
+      console.log(`DownloadService.${methodName}`, args);
       const result = originalObject[methodName](...args);
-      console.log('Result:', result);
+      console.log(`DownloadService.${methodName} result:`, result);
 
       return result;
     }
