@@ -93,12 +93,11 @@ export class CategoryDataWrapper extends Component {
   }
 
   async onSave(newItem) {
-console.log('onSave', newItem);
     const newState = {
       ...this.state.category,
       category: {
         ...this.state.category,
-        items: this.state.category.items.map(item => item.id === newItem.Id ? newItem : item)
+        items: this.state.category.items.map(item => item.id === newItem.id ? newItem : item)
       }
     };
 

@@ -23,19 +23,19 @@ class DownloadService {
   }
 
   async saveCategoryItem(categoryItem) {
-    categoryItem = { ...categoryItem, visible: categoryItem.visible ? 1 : 0 };
-
     return Promise.resolve(
       this.db = {
         ...this.db,
-        categories: [
-          ...this.db.categories.map(category => category.id !== categoryItem.categoryId
+        categories: this.db.categories.map(
+          category => category.id !== categoryItem.categoryId
             ? category
             : {
               ...category,
-              items: category.items.map(item => item.id === categoryItem.id ? categoryItem : item)
+              items: category.items.map(
+                item => item.id !== categoryItem.id
+                  ? item
+                  : { ...categoryItem, visible: categoryItem.visible ? 1 : 0 })
             })
-        ]
       });
   }
 
