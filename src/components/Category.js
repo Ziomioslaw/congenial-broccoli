@@ -102,8 +102,6 @@ export class Category extends Component {
             key={item.id}
             item={item}
             files={this.props.files}
-            onVisibleChange={this.props.onVisibleChange}
-            onPathChange={this.props.onPathChange}
             onSave={this.props.onSave} />)}
         </ReactSortable>
       </Table>

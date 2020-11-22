@@ -6,7 +6,7 @@ import { InlineEdit } from './InlineEdit';
 import Icon from 'react-bulma-components/lib/components/icon';
 import Button from 'react-bulma-components/lib/components/button';
 
-export function CategoryItem({ item, files, onVisibleChange, onPathChange, onSave }) {
+export function CategoryItem({ item, files, onSave }) {
   const id = item.id;
 
   return (<tr className="vertical-align-middle">
@@ -15,7 +15,7 @@ export function CategoryItem({ item, files, onVisibleChange, onPathChange, onSav
     <td><InlineEdit value={item.name} onSave={onStringFieldChange(item, onSave, 'name')} /></td>
     <td><InlineEdit value={item.description} onSave={onStringFieldChange(item, onSave, 'description')} /></td>
     <td>
-      <Select value={item.path} onChange={e => onPathChange(item.id, e.target.value)}>
+      <Select value={item.path} onChange={onSelectFieldChange(item, onSave, 'path')}>
         {files.map((file, index) => <option key={index} value={file.name}>{file.name}</option>)}
       </Select>
     </td>
@@ -40,6 +40,15 @@ function onBooleanFieldChange(item, onSave, fieldName) {
     return onSave({
       ...item,
       [fieldName]: !item[fieldName]
+    });
+  };
+}
+
+function onSelectFieldChange(item, onSave, fieldName) {
+  return (event) => {
+    return onSave({
+      ...item,
+      [fieldName]: event.target.value
     });
   };
 }
