@@ -18,7 +18,7 @@ class DownloadService {
       items: category.items.map(item => ({
         ...item,
         visible: item.visible === 1
-      }))
+      })).sort((a, b) => a.order - b.order)
     });
   }
 

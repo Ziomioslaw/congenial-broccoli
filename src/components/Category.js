@@ -17,7 +17,6 @@ export class Category extends Component {
       newItem: null
     };
 
-    this.setList = this.setList.bind(this);
     this.onAddButton = this.onAddButton.bind(this);
   }
 
@@ -59,14 +58,6 @@ export class Category extends Component {
     return this.state.newItem;
   }
 
-  setList(items) {
-    const curentItems = this.props.items;
-    const newItemsList = items.map((item, index) => ({ ...item, order: index * 10 }));
-    const itemsToSave = newItemsList.filter((newItem) => curentItems.find(i => i.id === newItem.id).order !== newItem.order);
-
-    itemsToSave.forEach(async item => await this.context.saveCategoryItem(item));
-  }
-
   sortItems(a, b) {
     return a.order - b.order;
   }
@@ -94,10 +85,10 @@ export class Category extends Component {
         <ReactSortable tag='tbody'
           handle=".drag-able"
           list={this.props.items}
-          setList={this.setList}
+          setList={this.props.onItemsSave}
           animation={200}
           delayOnTouchStart={true}
-          delay={2}>
+          delay={200}>
           {items.map(item => <CategoryItem
             key={item.id}
             item={item}

@@ -21,6 +21,7 @@ export class CategoryDataWrapper extends Component {
     this.onLinkUpload = this.onLinkUpload.bind(this);
     this.onNewSave = this.onNewSave.bind(this);
     this.onSave = this.onSave.bind(this);
+    this.onItemsSave = this.onItemsSave.bind(this);
   }
 
   async componentDidMount() {
@@ -73,7 +74,7 @@ export class CategoryDataWrapper extends Component {
 
   async onSave(newItem) {
     const newState = {
-      ...this.state.category,
+      ...this.state,
       category: {
         ...this.state.category,
         items: this.state.category.items.map(item => item.id === newItem.id
@@ -91,6 +92,15 @@ export class CategoryDataWrapper extends Component {
     await this.loadData(this.props.categoryId);
   }
 
+  async onItemsSave(items) {
+    const curentItems = this.state.category.items;
+    const newItemsList = items.map((item, index) => ({ ...item, order: index * 10 }));
+    const itemsToSave = newItemsList.filter((newItem) => curentItems.find(i => i.id === newItem.id).order !== newItem.order);
+    itemsToSave.forEach(async item => await this.context.saveCategoryItem(item));
+
+    await this.loadData(this.props.categoryId);
+  }
+
   render() {
     if (this.state.files.length === 0 || !this.state.category) {
       return <Loader />
@@ -102,7 +112,8 @@ export class CategoryDataWrapper extends Component {
         files={this.state.files}
         items={this.state.category.items}
         onNewSave={this.onNewSave}
-        onSave={this.onSave} />
+        onSave={this.onSave}
+        onItemsSave={this.onItemsSave} />
       <FileList
         files={this.state.files}
         onDelete={this.onDelete} />
