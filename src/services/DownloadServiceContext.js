@@ -74,6 +74,17 @@ class DownloadService {
     return Promise.resolve(newId);
   }
 
+  async deleteItem(item) {
+    return Promise.resolve(
+      this.db.categories = this.db.categories.map(category => item.categoryId !== category.id
+        ? category
+        : {
+          ...category,
+          items: category.items.filter(i => i.id !== item.id)
+        })
+    );
+  }
+
   async uploadItem(categoryId, link) {
     const category = await this.getCategory(categoryId);
     const tokens = link.split('/');

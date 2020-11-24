@@ -2,14 +2,8 @@ import React from 'react';
 import Table from 'react-bulma-components/lib/components/table';
 import Button from 'react-bulma-components/lib/components/button';
 import Loader from 'react-bulma-components/lib/components/loader';
+import { onDeleteConfirm } from '../utilities/dialogs';
 
-function onDeleteButton(file, onDelete) {
-  return () => {
-    if (window.confirm(`Do you want delete the file '${file.name}'?`)) {
-      onDelete(file, onDelete);
-    }
-  };
-}
 
 export function FileList({ files, onDelete }) {
   if (!files) {
@@ -29,7 +23,7 @@ export function FileList({ files, onDelete }) {
         <td>{file.name}</td>
         <td>{file.size}</td>
         <td>
-          <Button onClick={onDeleteButton(file, onDelete)}>Delete</Button>
+          <Button onClick={onDeleteConfirm(`Do you want delete the file '${file.name}'?`, file, onDelete)}>Delete</Button>
         </td>
       </tr>)}
     </tbody>

@@ -22,6 +22,7 @@ export class CategoryDataWrapper extends Component {
     this.onNewSave = this.onNewSave.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onItemsSave = this.onItemsSave.bind(this);
+    this.onItemDelete = this.onItemDelete.bind(this);
   }
 
   async componentDidMount() {
@@ -101,6 +102,11 @@ export class CategoryDataWrapper extends Component {
     await this.loadData(this.props.categoryId);
   }
 
+  async onItemDelete(item) {
+    await this.context.deleteItem(item);
+    await this.loadData(this.props.categoryId);
+  }
+
   render() {
     if (this.state.files.length === 0 || !this.state.category) {
       return <Loader />
@@ -113,7 +119,8 @@ export class CategoryDataWrapper extends Component {
         items={this.state.category.items}
         onNewSave={this.onNewSave}
         onSave={this.onSave}
-        onItemsSave={this.onItemsSave} />
+        onItemsSave={this.onItemsSave}
+        onDelete={this.onItemDelete} />
       <FileList
         files={this.state.files}
         onDelete={this.onDelete} />

@@ -5,8 +5,9 @@ import { DisplayByteSize } from './DisplayByteSize';
 import { InlineEdit } from './InlineEdit';
 import Icon from 'react-bulma-components/lib/components/icon';
 import Button from 'react-bulma-components/lib/components/button';
+import { onDeleteConfirm } from '../utilities/dialogs';
 
-export function CategoryItem({ item, files, onSave }) {
+export function CategoryItem({ item, files, onSave, onDelete }) {
   const id = item.id;
 
   return (<tr className="vertical-align-middle">
@@ -22,7 +23,7 @@ export function CategoryItem({ item, files, onSave }) {
     <td><Checkbox onChange={onBooleanFieldChange(item, onSave, 'visible')} checked={item.visible} /></td>
     <td><DisplayByteSize value={item.size} /></td>
     <td>{id ? item.downloaded : buildSaveButton(item, onSave)}</td>
-    <td><Button className="delete"></Button></td>
+    <td><Button className="delete" onClick={onDeleteConfirm(`Do you want delete the item ${item.name}`, item, onDelete)}></Button></td>
   </tr>);
 }
 

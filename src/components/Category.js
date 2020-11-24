@@ -93,7 +93,8 @@ export class Category extends Component {
             key={item.id}
             item={item}
             files={this.props.files}
-            onSave={this.props.onSave} />)}
+            onSave={this.props.onSave}
+            onDelete={this.props.onDelete} />)}
         </ReactSortable>
       </Table>
     </>);
