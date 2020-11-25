@@ -13,7 +13,7 @@ export class CategoryDataWrapper extends Component {
 
     this.state = {
       category: null,
-      files: []
+      files: null
     };
 
     this.onDelete = this.onDelete.bind(this);
@@ -108,7 +108,7 @@ export class CategoryDataWrapper extends Component {
   }
 
   render() {
-    if (this.state.files.length === 0 || !this.state.category) {
+    if (!this.state.files || !this.state.category) {
       return <Loader />
     }
 
