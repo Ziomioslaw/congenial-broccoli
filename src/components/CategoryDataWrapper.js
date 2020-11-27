@@ -19,7 +19,7 @@ export class CategoryDataWrapper extends Component {
     this.onDelete = this.onDelete.bind(this);
     this.onFileUpload = this.onFileUpload.bind(this);
     this.onLinkUpload = this.onLinkUpload.bind(this);
-    this.onNewSave = this.onNewSave.bind(this);
+    this.onAddItem = this.onAddItem.bind(this);
     this.onSave = this.onSave.bind(this);
     this.onItemsSave = this.onItemsSave.bind(this);
     this.onItemDelete = this.onItemDelete.bind(this);
@@ -68,8 +68,27 @@ export class CategoryDataWrapper extends Component {
     }
   }
 
-  async onNewSave() {
-    await this.context.addItem(this.state.category.items.find(i => i.id === null));
+  async onAddItem() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const file = this.state.files.sort((a, b) => a.date > b.date)[0];
+
+    const newItem = {
+      id: null,
+      name: "",
+      categoryId: this.props.categoryId,
+      path: file.name,
+      description: "",
+      visible: true,
+      created: `${yyyy}-${mm}-${dd}`,
+      size: file.size,
+      order: 0,
+      downloaded: 0
+    };
+
+    await this.context.addItem(newItem);
     await this.loadData(this.props.categoryId);
   }
 
@@ -117,7 +136,7 @@ export class CategoryDataWrapper extends Component {
         categoryId={this.props.categoryId}
         files={this.state.files}
         items={this.state.category.items}
-        onNewSave={this.onNewSave}
+        onAddItem={this.onAddItem}
         onSave={this.onSave}
         onItemsSave={this.onItemsSave}
         onDelete={this.onItemDelete} />
