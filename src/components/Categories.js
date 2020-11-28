@@ -5,7 +5,6 @@ import Columns from 'react-bulma-components/lib/components/columns';
 import Menu from 'react-bulma-components/lib/components/menu';
 import Loader from 'react-bulma-components/lib/components/loader';
 import { TabPanel } from 'utilities/TabPanel';
-import { CategoriesActions } from './CategoriesActions';
 import { CategoryDataWrapper } from './CategoryDataWrapper';
 
 
@@ -68,8 +67,6 @@ export class Categories extends Component {
           <CategoryDataWrapper categoryId={this.state.tabPanel.getActiveValue()} />
         </Columns.Column>
       </Columns>
-
-      <CategoriesActions />
     </>);
   }
 }

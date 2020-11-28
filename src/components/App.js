@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Categories } from './Categories';
 import { Notepad } from './Notepad';
 import { Header } from './Header';
-import { ServerStatus } from './ServerStatus';
 import Box from 'react-bulma-components/lib/components/box';
 import { TabPanel } from '../utilities/TabPanel';
 
@@ -15,7 +14,6 @@ class App extends Component {
 
     tabPanel.addTab('Categories', <Categories />);
     tabPanel.addTab('Notepad', <Notepad />);
-    tabPanel.addTab('Server Status', <ServerStatus />);
 
     this.state = {
       tabPanel: tabPanel,
