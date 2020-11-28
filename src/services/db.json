@@ -170,7 +170,8 @@
     "addons": [],
     "mac": [
       { "name": "gimp-2.10.16.mac", "size": 70568, "date": "2020-10-02T17:03:31.232Z" }
-    ]
+    ],
+    "gmic": []
   },
   "notes": "## Linki i repozytoria dla Ubuntu\n\n##Python\nPython 2.6.6 (Strona projektu)\n\nPyGTK all-in-one (Repozytorium)\nPrzeznaczona jest pod systemy 32bit. Plik ten zawiera wszystkie potrzebne nam biblioteki - PyGTK, PyCairo oraz PyGObject"
 }
